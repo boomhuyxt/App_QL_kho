@@ -101,6 +101,7 @@
             this.link_login.TabIndex = 5;
             this.link_login.TabStop = true;
             this.link_login.Text = "Đăng nhập";
+            this.link_login.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_login_LinkClicked);
             // 
             // panel6
             // 
@@ -124,11 +125,12 @@
             this.txt_confirmPasswordRegister.Size = new System.Drawing.Size(311, 27);
             this.txt_confirmPasswordRegister.TabIndex = 1;
             this.txt_confirmPasswordRegister.UseSystemPasswordChar = true;
-
+            this.txt_confirmPasswordRegister.Enter += new System.EventHandler(this.txt_confirmPasswordRegister_Enter);
+            this.txt_confirmPasswordRegister.Leave += new System.EventHandler(this.txt_confirmPasswordRegister_Leave);
             // 
             // pictureBox5
             // 
-
+            this.pictureBox5.Image = global::App_QL_kho.Properties.Resources.enter;
             this.pictureBox5.Location = new System.Drawing.Point(5, 7);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(35, 35);
@@ -158,9 +160,13 @@
             this.txt_passwordRegister.Size = new System.Drawing.Size(311, 27);
             this.txt_passwordRegister.TabIndex = 1;
             this.txt_passwordRegister.UseSystemPasswordChar = true;
+            this.txt_passwordRegister.TextChanged += new System.EventHandler(this.txt_passwordRegister_TextChanged);
+            this.txt_passwordRegister.Enter += new System.EventHandler(this.txt_passwordRegister_Enter);
+            this.txt_passwordRegister.Leave += new System.EventHandler(this.txt_passwordRegister_Leave);
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Image = global::App_QL_kho.Properties.Resources.locked_computer;
             this.pictureBox3.Location = new System.Drawing.Point(5, 7);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(35, 35);
@@ -189,9 +195,13 @@
             this.txt_emailRegister.Name = "txt_emailRegister";
             this.txt_emailRegister.Size = new System.Drawing.Size(311, 27);
             this.txt_emailRegister.TabIndex = 1;
+            this.txt_emailRegister.TextChanged += new System.EventHandler(this.txt_emailRegister_TextChanged);
+            this.txt_emailRegister.Enter += new System.EventHandler(this.txt_emailRegister_Enter);
+            this.txt_emailRegister.Leave += new System.EventHandler(this.txt_emailRegister_Leave);
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Image = global::App_QL_kho.Properties.Resources.mail;
             this.pictureBox6.Location = new System.Drawing.Point(5, 7);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(35, 35);
@@ -220,9 +230,13 @@
             this.txt_usernameRegister.Name = "txt_usernameRegister";
             this.txt_usernameRegister.Size = new System.Drawing.Size(311, 27);
             this.txt_usernameRegister.TabIndex = 1;
-
+            this.txt_usernameRegister.TextChanged += new System.EventHandler(this.txt_usernameRegister_TextChanged);
+            this.txt_usernameRegister.Enter += new System.EventHandler(this.txt_usernameRegister_Enter);
+            this.txt_usernameRegister.Leave += new System.EventHandler(this.txt_usernameRegister_Leave);
+            // 
             // pictureBox4
             // 
+            this.pictureBox4.Image = global::App_QL_kho.Properties.Resources.user;
             this.pictureBox4.Location = new System.Drawing.Point(5, 7);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(35, 35);
@@ -292,7 +306,7 @@
             this.link_register.TabIndex = 5;
             this.link_register.TabStop = true;
             this.link_register.Text = "Đăng ký";
-
+            this.link_register.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_register_LinkClicked);
             // 
             // pnl_passwordLogin
             // 
@@ -316,11 +330,13 @@
             this.txt_loginPassword.Size = new System.Drawing.Size(311, 27);
             this.txt_loginPassword.TabIndex = 1;
             this.txt_loginPassword.UseSystemPasswordChar = true;
-
+            this.txt_loginPassword.TextChanged += new System.EventHandler(this.txt_loginPassword_TextChanged);
+            this.txt_loginPassword.Enter += new System.EventHandler(this.txt_loginPassword_Enter);
+            this.txt_loginPassword.Leave += new System.EventHandler(this.txt_loginPassword_Leave);
             // 
             // pictureBox2
             // 
-
+            this.pictureBox2.Image = global::App_QL_kho.Properties.Resources.locked_computer;
             this.pictureBox2.Location = new System.Drawing.Point(4, 7);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(35, 35);
@@ -349,10 +365,12 @@
             this.txt_usernameLogin.Name = "txt_usernameLogin";
             this.txt_usernameLogin.Size = new System.Drawing.Size(311, 27);
             this.txt_usernameLogin.TabIndex = 1;
-
+            this.txt_usernameLogin.Enter += new System.EventHandler(this.txt_usernameLogin_Enter);
+            this.txt_usernameLogin.Leave += new System.EventHandler(this.txt_usernameLogin_Leave);
+            // 
             // pictureBox1
             // 
-
+            this.pictureBox1.Image = global::App_QL_kho.Properties.Resources.user;
             this.pictureBox1.Location = new System.Drawing.Point(5, 7);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(35, 35);
@@ -385,7 +403,8 @@
             this.link_forgotPassword.TabIndex = 2;
             this.link_forgotPassword.TabStop = true;
             this.link_forgotPassword.Text = "Quên mật khẩu?";
-
+            this.link_forgotPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_forgotPassword_LinkClicked);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -398,7 +417,8 @@
             this.label1.Text = "Đăng Nhập";
             // 
             // pictureBox7
-
+            // 
+            this.pictureBox7.Image = global::App_QL_kho.Properties.Resources.logo_crypto_removebg_preview;
             this.pictureBox7.Location = new System.Drawing.Point(26, 116);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(420, 332);
@@ -418,7 +438,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormDangNhap_DangKy";
             this.Text = "FormDangNhap_DangKy";
-
+            this.Load += new System.EventHandler(this.FormDangNhap_DangKy_Load);
             this.pnl_register.ResumeLayout(false);
             this.pnl_register.PerformLayout();
             this.panel6.ResumeLayout(false);

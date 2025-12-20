@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace App_QL_kho
 {
-    public partial class TrangChu : Form
+    public partial class FormTrangChu : Form
     {
-        public TrangChu()
+        public FormTrangChu()
         {
             InitializeComponent();
         }
