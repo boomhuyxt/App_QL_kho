@@ -54,6 +54,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\CT_PhieuNhap.cs" />
+    <Compile Include="Data\CT_PhieuXuat.cs" />
+    <Compile Include="Data\LichSuNhapXuat.cs" />
+    <Compile Include="Data\Model1.cs" />
+    <Compile Include="Data\NguoiDung.cs" />
+    <Compile Include="Data\NhomSanPham.cs" />
+    <Compile Include="Data\PhieuNhap.cs" />
+    <Compile Include="Data\PhieuXuat.cs" />
+    <Compile Include="Data\SanPham.cs" />
+    <Compile Include="Data\TonKho.cs" />
+    <Compile Include="Data\VaiTro.cs" />
     <Compile Include="Forms\FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,7 +157,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

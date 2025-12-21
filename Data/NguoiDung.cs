@@ -1,0 +1,50 @@
+namespace App_QL_kho.Data
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("NguoiDung")]
+    public partial class NguoiDung
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NguoiDung()
+        {
+            PhieuNhaps = new HashSet<PhieuNhap>();
+            PhieuXuats = new HashSet<PhieuXuat>();
+            VaiTroes = new HashSet<VaiTro>();
+        }
+
+        [Key]
+        public int MaND { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string TenDangNhap { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string MatKhauHash { get; set; }
+
+        [StringLength(100)]
+        public string HoTen { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        public bool? TrangThai { get; set; }
+
+        public DateTime? NgayTao { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuXuat> PhieuXuats { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VaiTro> VaiTroes { get; set; }
+    }
+}
