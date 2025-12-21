@@ -29,9 +29,6 @@ namespace App_QL_kho.Data
         public string MatKhauHash { get; set; }
 
         [StringLength(100)]
-        public string HoTen { get; set; }
-
-        [StringLength(100)]
         public string Email { get; set; }
 
         public bool? TrangThai { get; set; }

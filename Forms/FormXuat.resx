@@ -3239,6 +3239,9 @@
         0k/wB21JkiRJkiRJ0k/wB21JkiRJkiRJ0k/4BwuJjsObk7ScAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAAMgAAAEAIAAoOQMAFgAAACgAAAAAAQAAkAEAAAEAIAAAAAAAACADAAAAAAAAAAAAAAAAAAAA

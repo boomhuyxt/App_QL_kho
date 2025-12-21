@@ -10,15 +10,11 @@ using System.Windows.Forms;
 
 namespace App_QL_kho.Forms
 {
-    public partial class FormNhap : Form
+    public partial class FormNguoiDung : Form
     {
-        public FormNhap()
+        public FormNguoiDung()
         {
             InitializeComponent();
         }
-
-
-
-
     }
 }

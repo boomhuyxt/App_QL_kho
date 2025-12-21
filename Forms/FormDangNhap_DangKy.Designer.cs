@@ -78,14 +78,13 @@
             // pnl_register
             // 
             this.pnl_register.Controls.Add(this.link_login);
-            this.pnl_register.Controls.Add(this.pnl_login);
             this.pnl_register.Controls.Add(this.panel6);
             this.pnl_register.Controls.Add(this.panel4);
             this.pnl_register.Controls.Add(this.panel1);
             this.pnl_register.Controls.Add(this.panel5);
             this.pnl_register.Controls.Add(this.btn_register);
             this.pnl_register.Controls.Add(this.label4);
-            this.pnl_register.Location = new System.Drawing.Point(303, 27);
+            this.pnl_register.Location = new System.Drawing.Point(314, 21);
             this.pnl_register.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_register.Name = "pnl_register";
             this.pnl_register.Size = new System.Drawing.Size(297, 338);
@@ -130,8 +129,7 @@
             this.txt_confirmPasswordRegister.Size = new System.Drawing.Size(207, 18);
             this.txt_confirmPasswordRegister.TabIndex = 1;
             this.txt_confirmPasswordRegister.UseSystemPasswordChar = true;
-            this.txt_confirmPasswordRegister.Enter += new System.EventHandler(this.txt_confirmPasswordRegister_Enter);
-            this.txt_confirmPasswordRegister.Leave += new System.EventHandler(this.txt_confirmPasswordRegister_Leave);
+            this.txt_confirmPasswordRegister.LocationChanged += new System.EventHandler(this.txt_confirmPasswordRegister_Enter);
             // 
             // pictureBox5
             // 
@@ -168,9 +166,7 @@
             this.txt_passwordRegister.Size = new System.Drawing.Size(207, 18);
             this.txt_passwordRegister.TabIndex = 1;
             this.txt_passwordRegister.UseSystemPasswordChar = true;
-            this.txt_passwordRegister.TextChanged += new System.EventHandler(this.txt_passwordRegister_TextChanged);
-            this.txt_passwordRegister.Enter += new System.EventHandler(this.txt_passwordRegister_Enter);
-            this.txt_passwordRegister.Leave += new System.EventHandler(this.txt_passwordRegister_Leave);
+            this.txt_passwordRegister.LocationChanged += new System.EventHandler(this.txt_passwordRegister_Enter);
             // 
             // pictureBox3
             // 
@@ -206,9 +202,7 @@
             this.txt_emailRegister.Name = "txt_emailRegister";
             this.txt_emailRegister.Size = new System.Drawing.Size(207, 18);
             this.txt_emailRegister.TabIndex = 1;
-            this.txt_emailRegister.TextChanged += new System.EventHandler(this.txt_emailRegister_TextChanged);
-            this.txt_emailRegister.Enter += new System.EventHandler(this.txt_emailRegister_Enter);
-            this.txt_emailRegister.Leave += new System.EventHandler(this.txt_emailRegister_Leave);
+            this.txt_emailRegister.LocationChanged += new System.EventHandler(this.txt_emailRegister_Enter);
             // 
             // pictureBox6
             // 
@@ -244,9 +238,7 @@
             this.txt_usernameRegister.Name = "txt_usernameRegister";
             this.txt_usernameRegister.Size = new System.Drawing.Size(207, 18);
             this.txt_usernameRegister.TabIndex = 1;
-            this.txt_usernameRegister.TextChanged += new System.EventHandler(this.txt_usernameRegister_TextChanged);
-            this.txt_usernameRegister.Enter += new System.EventHandler(this.txt_usernameRegister_Enter);
-            this.txt_usernameRegister.Leave += new System.EventHandler(this.txt_usernameRegister_Leave);
+            this.txt_usernameRegister.LocationChanged += new System.EventHandler(this.txt_usernameRegister_Enter);
             // 
             // pictureBox4
             // 
@@ -295,7 +287,7 @@
             this.pnl_login.Controls.Add(this.btn_login);
             this.pnl_login.Controls.Add(this.link_forgotPassword);
             this.pnl_login.Controls.Add(this.label1);
-            this.pnl_login.Location = new System.Drawing.Point(0, 2);
+            this.pnl_login.Location = new System.Drawing.Point(314, 23);
             this.pnl_login.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_login.Name = "pnl_login";
             this.pnl_login.Size = new System.Drawing.Size(297, 296);
@@ -352,7 +344,7 @@
             this.txt_loginPassword.Size = new System.Drawing.Size(207, 18);
             this.txt_loginPassword.TabIndex = 1;
             this.txt_loginPassword.UseSystemPasswordChar = true;
-            this.txt_loginPassword.TextChanged += new System.EventHandler(this.txt_loginPassword_TextChanged);
+            this.txt_loginPassword.LocationChanged += new System.EventHandler(this.txt_loginPassword_Enter);
             this.txt_loginPassword.Enter += new System.EventHandler(this.txt_loginPassword_Enter);
             this.txt_loginPassword.Leave += new System.EventHandler(this.txt_loginPassword_Leave);
             // 
@@ -390,6 +382,7 @@
             this.txt_usernameLogin.Name = "txt_usernameLogin";
             this.txt_usernameLogin.Size = new System.Drawing.Size(207, 18);
             this.txt_usernameLogin.TabIndex = 1;
+            this.txt_usernameLogin.LocationChanged += new System.EventHandler(this.txt_usernameLogin_Enter);
             this.txt_usernameLogin.Enter += new System.EventHandler(this.txt_usernameLogin_Enter);
             this.txt_usernameLogin.Leave += new System.EventHandler(this.txt_usernameLogin_Leave);
             // 
@@ -431,7 +424,6 @@
             this.link_forgotPassword.TabIndex = 2;
             this.link_forgotPassword.TabStop = true;
             this.link_forgotPassword.Text = "Quên mật khẩu?";
-            this.link_forgotPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_forgotPassword_LinkClicked);
             // 
             // label1
             // 
@@ -463,6 +455,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(622, 386);
             this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.pnl_login);
             this.Controls.Add(this.pnl_register);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
