@@ -102,6 +102,12 @@
     <Compile Include="Forms\FormForgotPassword.Designer.cs">
       <DependentUpon>FormForgotPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNhap.Designer.cs">
+      <DependentUpon>FormNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormXuat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormForgotPassword.resx">
       <DependentUpon>FormForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNhap.resx">
+      <DependentUpon>FormNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormXuat.resx">
       <DependentUpon>FormXuat.cs</DependentUpon>
