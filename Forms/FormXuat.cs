@@ -15,7 +15,6 @@ namespace App_QL_kho
     public partial class FormXuat : Form
     {
         private CameraQR camera;
-        private App_QL_kho.Services.Menu menuService;
         public FormXuat()
         {
             InitializeComponent();
