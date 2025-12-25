@@ -91,6 +91,7 @@
     <Compile Include="Data\PhieuNhap.cs" />
     <Compile Include="Data\PhieuXuat.cs" />
     <Compile Include="Data\SanPham.cs" />
+    <Compile Include="Data\sysdiagram.cs" />
     <Compile Include="Data\TonKho.cs" />
     <Compile Include="Data\VaiTro.cs" />
     <Compile Include="Forms\FormAdmin.cs">
@@ -141,6 +142,7 @@
     <Compile Include="Forms\FormTrangChu.Designer.cs">
       <DependentUpon>FormTrangChu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model_PhieuXuat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CameraQR.cs" />
@@ -187,9 +189,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\profile.png" />
   </ItemGroup>
@@ -222,6 +222,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

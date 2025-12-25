@@ -17,7 +17,7 @@ namespace App_QL_kho
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAdmin());
+            Application.Run(new FormDangNhap_DangKy());
         }
     }
 }

@@ -26,8 +26,7 @@ namespace App_QL_kho.Data
 
         public int MaNhom { get; set; }
 
-        [StringLength(50)]
-        public string DonViTinh { get; set; }
+        public int SoLuong { get; set; }
 
         public decimal? GiaNhap { get; set; }
 
