@@ -5,72 +5,92 @@ namespace App_QL_kho.Forms
 {
     public partial class FormAdmin : Form
     {
-        // Biến lưu trữ Form đang hiển thị hiện tại
         private Form activeForm = null;
 
         public FormAdmin()
         {
             InitializeComponent();
+            RegisterEvents();
 
-            tsb_trangchu.Click += tsb_trangchu_Click;
-            tsb_nhap.Click += tsb_nhap_Click;
-            tsb_xuat.Click += tsb_xuat_Click;
-            tsb_baocao.Click += tsb_baocao_Click;
-            tsb_nguoidung.Click += tsb_nguoidung_Click;
-            // Mở mặc định trang chủ khi vừa load Admin
-            OpenChildForm(new FormTrangChu());
+            this.Load += (s, e) => {
+                if (activeForm == null) OpenChildForm(new FormTrangChu());
+            };
+        }
+
+        private void RegisterEvents()
+        {
+            tsb_trangchu.Click += (s, e) => OpenChildForm(new FormTrangChu());
+            tsl_trangchu.Click += (s, e) => OpenChildForm(new FormTrangChu());
+
+            // Sửa lỗi nhấn vào Đơn hàng
+            tsb_donhang.Click += (s, e) => OpenChildForm(new FormDonHang());
+            tsl_donhang.Click += (s, e) => OpenChildForm(new FormDonHang());
+
+            tsb_nhap.Click += (s, e) => OpenChildForm(new FormNhap());
+            tsl_nhap.Click += (s, e) => OpenChildForm(new FormNhap());
+
+            tsb_xuat.Click += (s, e) => OpenChildForm(new FormXuat());
+            tsl_xuat.Click += (s, e) => OpenChildForm(new FormXuat());
+
+            tsb_baocao.Click += (s, e) => OpenChildForm(new FormBaoCao());
+            tsl_baocao.Click += (s, e) => OpenChildForm(new FormBaoCao());
+
+            tsb_nguoidung.Click += (s, e) => OpenChildForm(new FormNguoiDung());
+            tsl_nguoidung.Click += (s, e) => OpenChildForm(new FormNguoiDung());
         }
 
         private void OpenChildForm(Form childForm)
         {
-            // 1. Đóng Form cũ
-            if (activeForm != null)
+            if (activeForm != null && activeForm.GetType() == childForm.GetType()) return;
+
+            this.BeginInvoke(new Action(() =>
             {
-                activeForm.Close();
-                activeForm.Dispose();
-            }
+                try
+                {
+                    // 1. Tạm dừng Layout
+                    tlp_home.SuspendLayout();
 
-            activeForm = childForm;
+                    // 2. Thiết lập Form con TRƯỚC KHI gán
+                    childForm.TopLevel = false;
+                    childForm.FormBorderStyle = FormBorderStyle.None;
+                    childForm.Dock = DockStyle.Fill;
 
-            // 2. Thiết lập Form con
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
+                    // 3. Xử lý Form cũ
+                    if (activeForm != null)
+                    {
+                        activeForm.Hide(); // Ẩn trước để giải phóng giao diện nhanh
+                        activeForm.Close();
+                        activeForm.Dispose();
+                    }
 
-            // 3. XÓA tableLayoutPanel1 (vùng chứa GridView mặc định) ra khỏi Cột 2 để nhường chỗ
-            // Cột 2 của tlp_home nằm ở vị trí (1, 0)
-            Control oldControl = tlp_home.GetControlFromPosition(1, 0);
-            if (oldControl != null && oldControl != childForm)
-            {
-                tlp_home.Controls.Remove(oldControl);
-            }
+                    // 4. Xóa sạch ô nội dung một cách an toàn
+                    Control oldControl = tlp_home.GetControlFromPosition(1, 0);
+                    while (oldControl != null)
+                    {
+                        tlp_home.Controls.Remove(oldControl);
+                        if (!oldControl.IsDisposed) oldControl.Dispose();
+                        oldControl = tlp_home.GetControlFromPosition(1, 0);
+                    }
 
-            // 4. Thêm Form con vào đúng Cột 2 của TableLayoutPanel
-            tlp_home.Controls.Add(childForm, 1, 0);
+                    // 5. HIỆN FORM CON TRƯỚC KHI ADD (Để Windows ko phải resize khi form đang ẩn)
+                    childForm.Show();
 
-            childForm.Show();
-        }
+                    // 6. Thêm vào TableLayoutPanel
+                    activeForm = childForm;
+                    tlp_home.Controls.Add(childForm, 1, 0);
+                    childForm.BringToFront();
 
-        // --- CÁC SỰ KIỆN CLICK ---
-
-        private void tsb_trangchu_Click(object sender, EventArgs e) => OpenChildForm(new FormTrangChu());
-        private void tsl_trangchu_Click(object sender, EventArgs e) => OpenChildForm(new FormTrangChu());
-
-        private void tsb_nhap_Click(object sender, EventArgs e) => OpenChildForm(new FormNhap());
-        private void tsl_nhap_Click(object sender, EventArgs e) => OpenChildForm(new FormNhap());
-
-        private void tsb_xuat_Click(object sender, EventArgs e) => OpenChildForm(new FormXuat());
-        private void tsl_xuat_Click(object sender, EventArgs e) => OpenChildForm(new FormXuat());
-
-        private void tsb_baocao_Click(object sender, EventArgs e) => OpenChildForm(new FormBaoCao());
-        private void tsl_baocao_Click(object sender, EventArgs e) => OpenChildForm(new FormBaoCao());
-
-        private void tsb_nguoidung_Click(object sender, EventArgs e) => OpenChildForm(new FormNguoiDung());
-        private void tsl_nguoidung_Click(object sender, EventArgs e) => OpenChildForm(new FormNguoiDung());
-
-        private void tsb_donhang_Click(object sender, EventArgs e)
-        {
-            // Ví dụ: OpenChildForm(new FormDonHang());
+                    // 7. Tiếp tục Layout mà KHÔNG ép buộc resize sâu (tham số false)
+                    tlp_home.ResumeLayout(false);
+                    tlp_home.PerformLayout(); // Ép thực hiện vẽ lại sau khi đã ổn định
+                }
+                catch (Exception ex)
+                {
+                    string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                    MessageBox.Show("Lỗi hiển thị Form: " + msg);
+                    if (tlp_home != null) tlp_home.ResumeLayout(true);
+                }
+            }));
         }
     }
 }

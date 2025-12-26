@@ -6,11 +6,11 @@ using System.Windows.Forms;
 using App_QL_kho.Data;
 using App_QL_kho.Models;
 
-namespace App_QL_kho
+namespace App_QL_kho.Forms
 {
-    public partial class FormTrangChu : Form
+    public partial class FormDonHang : Form
     {
-        public FormTrangChu()
+        public FormDonHang()
         {
             InitializeComponent();
             // Đăng ký sự kiện
@@ -19,7 +19,6 @@ namespace App_QL_kho
             this.cmb_nhomSP.SelectedIndexChanged += (s, e) => FilterData();
             this.dtp_thoiGian.ValueChanged += (s, e) => FilterData();
         }
-
         private void FormTrangChu_Load(object sender, EventArgs e)
         {
             SetupDataGridView();
