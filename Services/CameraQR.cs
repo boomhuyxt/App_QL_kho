@@ -14,14 +14,12 @@ namespace App_QL_kho.Services
 
         private ComboBox cb_camera;
         private PictureBox pictureBoxPreview;
-        private TextBox txt_result;
-        private FormXuat parentForm; 
+        private FormXuat parentForm;
 
-        public CameraQR(ComboBox cb, PictureBox pic, TextBox txt, FormXuat parent)
+        public CameraQR(ComboBox cb, PictureBox pic, FormXuat parent)
         {
             this.cb_camera = cb;
             this.pictureBoxPreview = pic;
-            this.txt_result = txt;
             this.parentForm = parent;
             LoadCamera();
         }
@@ -38,9 +36,13 @@ namespace App_QL_kho.Services
 
         public void Stop()
         {
-            if (videoCaptureDevice != null && videoCaptureDevice.IsRunning)
+            if (videoCaptureDevice != null)
             {
-                videoCaptureDevice.SignalToStop();
+                if (videoCaptureDevice.IsRunning)
+                {
+                    videoCaptureDevice.SignalToStop();
+                    videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
+                }
                 videoCaptureDevice = null;
             }
         }
@@ -55,11 +57,12 @@ namespace App_QL_kho.Services
 
         private void VideoCaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            if (parentForm == null || parentForm.IsDisposed) return; // Kiểm tra Form cha còn tồn tại không
+            // Kiểm tra FormXuat còn tồn tại hay không trước khi xử lý (Sửa lỗi hình image_33d0ce)
+            if (parentForm == null || parentForm.IsDisposed) return;
 
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
 
-            // Hiển thị camera lên PictureBox an toàn
+            // Cập nhật giao diện an toàn (Sửa lỗi hình image_7778e1)
             if (pictureBoxPreview.IsHandleCreated && !pictureBoxPreview.IsDisposed)
             {
                 try
@@ -71,9 +74,10 @@ namespace App_QL_kho.Services
                         pictureBoxPreview.Image = (Bitmap)bitmap.Clone();
                     }));
                 }
-                catch { /* Bỏ qua nếu form đang đóng */ }
+                catch { /* Bỏ qua nếu Form đang đóng */ }
             }
 
+            // Giải mã Barcode/QR
             BarcodeReader reader = new BarcodeReader();
             var result = reader.Decode(bitmap);
 
@@ -83,13 +87,14 @@ namespace App_QL_kho.Services
                 {
                     parentForm.Invoke(new Action(() =>
                     {
-                        if (!parentForm.IsDisposed && txt_result.Text != result.Text)
+                        if (!parentForm.IsDisposed && parentForm.lastScannedCode != result.Text)
                         {
+                            parentForm.lastScannedCode = result.Text;
                             parentForm.HandleScannedResult(result.Text);
                         }
                     }));
                 }
-                catch { /* Bỏ qua nếu form đang đóng */ }
+                catch { /* Bỏ qua nếu Form đang đóng */ }
             }
             bitmap.Dispose();
         }
