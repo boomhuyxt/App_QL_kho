@@ -62,13 +62,13 @@
             this.tableLayoutPanel1.Controls.Add(this.dgv_trangchu, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.pnl_filter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(16, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1176, 600);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1337, 622);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // dgv_trangchu
@@ -102,7 +102,7 @@
             this.dgv_trangchu.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_trangchu.EnableHeadersVisualStyles = false;
             this.dgv_trangchu.GridColor = System.Drawing.Color.LightBlue;
-            this.dgv_trangchu.Location = new System.Drawing.Point(3, 122);
+            this.dgv_trangchu.Location = new System.Drawing.Point(3, 126);
             this.dgv_trangchu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgv_trangchu.Name = "dgv_trangchu";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -115,7 +115,7 @@
             this.dgv_trangchu.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_trangchu.RowHeadersWidth = 62;
             this.dgv_trangchu.RowTemplate.Height = 28;
-            this.dgv_trangchu.Size = new System.Drawing.Size(1170, 476);
+            this.dgv_trangchu.Size = new System.Drawing.Size(1331, 494);
             this.dgv_trangchu.TabIndex = 2;
             // 
             // Column1
@@ -167,7 +167,7 @@
             this.pnl_filter.Location = new System.Drawing.Point(3, 2);
             this.pnl_filter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnl_filter.Name = "pnl_filter";
-            this.pnl_filter.Size = new System.Drawing.Size(1170, 116);
+            this.pnl_filter.Size = new System.Drawing.Size(1331, 120);
             this.pnl_filter.TabIndex = 0;
             // 
             // dtp_thoiGian
@@ -175,7 +175,7 @@
             this.dtp_thoiGian.Location = new System.Drawing.Point(617, 59);
             this.dtp_thoiGian.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtp_thoiGian.Name = "dtp_thoiGian";
-            this.dtp_thoiGian.Size = new System.Drawing.Size(179, 22);
+            this.dtp_thoiGian.Size = new System.Drawing.Size(283, 22);
             this.dtp_thoiGian.TabIndex = 11;
             // 
             // txt_sanPham
@@ -264,7 +264,7 @@
             this.tlp_home.Name = "tlp_home";
             this.tlp_home.RowCount = 1;
             this.tlp_home.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_home.Size = new System.Drawing.Size(1195, 604);
+            this.tlp_home.Size = new System.Drawing.Size(1357, 626);
             this.tlp_home.TabIndex = 0;
             // 
             // FormTrangChu
@@ -272,7 +272,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(1195, 604);
+            this.ClientSize = new System.Drawing.Size(1357, 626);
             this.Controls.Add(this.tlp_home);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
