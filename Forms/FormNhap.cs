@@ -153,5 +153,10 @@ namespace App_QL_kho.Forms
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

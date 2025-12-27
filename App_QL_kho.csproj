@@ -171,6 +171,9 @@
     <EmbeddedResource Include="Forms\FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBaoCao.resx">
+      <DependentUpon>FormBaoCao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDangNhap_DangKy.resx">
       <DependentUpon>FormDangNhap_DangKy.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormForgotPassword.resx">
       <DependentUpon>FormForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNguoiDung.resx">
+      <DependentUpon>FormNguoiDung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormNhap.resx">
       <DependentUpon>FormNhap.cs</DependentUpon>
