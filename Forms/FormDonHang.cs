@@ -1,16 +1,17 @@
 ﻿using App_QL_kho.Data;
 using App_QL_kho.Models;
+using App_QL_kho.Services;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-// Thư viện hỗ trợ xuất file
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+
 
 namespace App_QL_kho.Forms
 {
@@ -105,79 +106,74 @@ namespace App_QL_kho.Forms
         // --- XỬ LÝ XUẤT FILE ---
         private void cb_XuatFile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_XuatFile.SelectedItem == null) return;
+            // Kiểm tra dữ liệu trước khi xuất
+            if (cb_XuatFile.SelectedIndex <= 0) return;
+
+            if (dgv_trangchu.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Thông báo");
+                cb_XuatFile.SelectedIndex = 0;
+                return;
+            }
+
             string selectedType = cb_XuatFile.SelectedItem.ToString().ToUpper();
 
             using (SaveFileDialog sfd = new SaveFileDialog())
             {
-                switch (selectedType)
+                sfd.Title = "Chọn nơi lưu file báo cáo";
+
+                // Cấu hình Filter
+                if (selectedType.Contains("EXCEL")) sfd.Filter = "Excel Workbook|*.xlsx";
+                else if (selectedType.Contains("PDF")) sfd.Filter = "PDF File|*.pdf";
+                else if (selectedType.Contains("WORD")) sfd.Filter = "Word Document|*.docx";
+                else sfd.Filter = "All Files|*.*";
+
+                sfd.FileName = "BaoCao_DonHang_" + DateTime.Now.ToString("yyyyMMdd_HHmm");
+
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    case "EXCEL":
-                        sfd.Filter = "Excel Workbook|*.xlsx";
-                        if (sfd.ShowDialog() == DialogResult.OK) ExportToExcel(sfd.FileName);
-                        break;
-                    case "PDF":
-                        sfd.Filter = "PDF File|*.pdf";
-                        if (sfd.ShowDialog() == DialogResult.OK) ExportToPDF(sfd.FileName);
-                        break;
-                    case "WORD":
-                        sfd.Filter = "Word Document|*.docx";
-                        if (sfd.ShowDialog() == DialogResult.OK) ExportToWord(sfd.FileName);
-                        break;
-                    case "TẤT CẢ":
-                        sfd.Title = "Đặt tên file chung để xuất";
-                        if (sfd.ShowDialog() == DialogResult.OK)
+                    string path = sfd.FileName;
+                    this.Cursor = Cursors.WaitCursor;
+
+                    try
+                    {
+                        // Thực thi xuất file
+                        if (selectedType == "TẤT CẢ")
                         {
-                            string dir = Path.GetDirectoryName(sfd.FileName);
-                            string name = Path.GetFileNameWithoutExtension(sfd.FileName);
-                            ExportToExcel(Path.Combine(dir, name + ".xlsx"));
-                            ExportToPDF(Path.Combine(dir, name + ".pdf"));
-                            ExportToWord(Path.Combine(dir, name + ".docx"));
-                            MessageBox.Show("Đã xuất tất cả định dạng!");
+                            string dir = Path.GetDirectoryName(path);
+                            string name = Path.GetFileNameWithoutExtension(path);
+
+                            ExportService.ExportToExcel(dgv_trangchu, Path.Combine(dir, name + ".xlsx"));
+                            ExportService.ExportToPDF(dgv_trangchu, Path.Combine(dir, name + ".pdf"));
+                            ExportService.ExportToWord(dgv_trangchu, Path.Combine(dir, name + ".docx"));
                         }
-                        break;
+                        else
+                        {
+                            if (selectedType.Contains("EXCEL")) ExportService.ExportToExcel(dgv_trangchu, path);
+                            else if (selectedType.Contains("PDF")) ExportService.ExportToPDF(dgv_trangchu, path);
+                            else if (selectedType.Contains("WORD")) ExportService.ExportToWord(dgv_trangchu, path);
+                        }
+
+                        MessageBox.Show("Đã lưu file thành công tại:\n" + path, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi thực thi: " + ex.Message, "Lỗi Hệ Thống");
+                    }
+                    finally
+                    {
+                        this.Cursor = Cursors.Default;
+                        // Ngắt sự kiện để reset mà không bị lặp loop
+                        this.cb_XuatFile.SelectedIndexChanged -= cb_XuatFile_SelectedIndexChanged;
+                        cb_XuatFile.SelectedIndex = 0;
+                        this.cb_XuatFile.SelectedIndexChanged += cb_XuatFile_SelectedIndexChanged;
+                    }
+                }
+                else
+                {
+                    cb_XuatFile.SelectedIndex = 0;
                 }
             }
-        }
-
-        private void ExportToExcel(string path)
-        {
-            var excelApp = new Excel.Application();
-            var workbook = excelApp.Workbooks.Add();
-            var sheet = (Excel.Worksheet)workbook.Sheets[1];
-            for (int i = 0; i < dgv_trangchu.Columns.Count; i++) sheet.Cells[1, i + 1] = dgv_trangchu.Columns[i].HeaderText;
-            for (int i = 0; i < dgv_trangchu.Rows.Count; i++)
-                for (int j = 0; j < dgv_trangchu.Columns.Count; j++)
-                    sheet.Cells[i + 2, j + 1] = dgv_trangchu.Rows[i].Cells[j].Value?.ToString();
-            workbook.SaveAs(path);
-            excelApp.Quit();
-        }
-
-        private void ExportToPDF(string path)
-        {
-            Document doc = new Document(PageSize.A4.Rotate());
-            PdfWriter.GetInstance(doc, new FileStream(path, FileMode.Create));
-            doc.Open();
-            PdfPTable table = new PdfPTable(dgv_trangchu.Columns.Count);
-            foreach (DataGridViewColumn col in dgv_trangchu.Columns) table.AddCell(new Phrase(col.HeaderText));
-            foreach (DataGridViewRow row in dgv_trangchu.Rows)
-                foreach (DataGridViewCell cell in row.Cells) table.AddCell(new Phrase(cell.Value?.ToString() ?? ""));
-            doc.Add(table);
-            doc.Close();
-        }
-
-        private void ExportToWord(string path)
-        {
-            var wordApp = new Word.Application();
-            var doc = wordApp.Documents.Add();
-            var table = doc.Tables.Add(doc.Range(), dgv_trangchu.Rows.Count + 1, dgv_trangchu.Columns.Count);
-            table.Borders.Enable = 1;
-            for (int i = 0; i < dgv_trangchu.Columns.Count; i++) table.Cell(1, i + 1).Range.Text = dgv_trangchu.Columns[i].HeaderText;
-            for (int i = 0; i < dgv_trangchu.Rows.Count; i++)
-                for (int j = 0; j < dgv_trangchu.Columns.Count; j++)
-                    table.Cell(i + 2, j + 1).Range.Text = dgv_trangchu.Rows[i].Cells[j].Value?.ToString();
-            doc.SaveAs2(path);
-            wordApp.Quit();
         }
     }
 }
