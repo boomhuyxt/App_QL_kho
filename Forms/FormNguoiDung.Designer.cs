@@ -29,99 +29,75 @@
         private void InitializeComponent()
         {
             this.gb_profile = new System.Windows.Forms.GroupBox();
-            this.txt_fullName = new System.Windows.Forms.TextBox();
-            this.txt_email = new System.Windows.Forms.TextBox();
-            this.txt_userName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.btn_sua = new System.Windows.Forms.Button();
+            this.btn_chan = new System.Windows.Forms.Button();
+            this.txt_timkiemTen = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dgv_nguoidung = new System.Windows.Forms.DataGridView();
+            this.ADMIN = new System.Windows.Forms.RadioButton();
+            this.QUANLY = new System.Windows.Forms.RadioButton();
+            this.NHAVIEN = new System.Windows.Forms.RadioButton();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gb_profile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_nguoidung)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_profile
             // 
-            this.gb_profile.Controls.Add(this.button2);
-            this.gb_profile.Controls.Add(this.button1);
-            this.gb_profile.Controls.Add(this.txt_fullName);
-            this.gb_profile.Controls.Add(this.txt_email);
-            this.gb_profile.Controls.Add(this.txt_userName);
-            this.gb_profile.Controls.Add(this.label5);
-            this.gb_profile.Controls.Add(this.label4);
+            this.gb_profile.Controls.Add(this.NHAVIEN);
+            this.gb_profile.Controls.Add(this.QUANLY);
+            this.gb_profile.Controls.Add(this.ADMIN);
+            this.gb_profile.Controls.Add(this.btn_sua);
+            this.gb_profile.Controls.Add(this.btn_chan);
+            this.gb_profile.Controls.Add(this.txt_timkiemTen);
             this.gb_profile.Controls.Add(this.label3);
             this.gb_profile.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_profile.ForeColor = System.Drawing.Color.White;
             this.gb_profile.Location = new System.Drawing.Point(11, 11);
-            this.gb_profile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gb_profile.Margin = new System.Windows.Forms.Padding(2);
             this.gb_profile.Name = "gb_profile";
-            this.gb_profile.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.gb_profile.Size = new System.Drawing.Size(996, 119);
+            this.gb_profile.Padding = new System.Windows.Forms.Padding(2);
+            this.gb_profile.Size = new System.Drawing.Size(996, 108);
             this.gb_profile.TabIndex = 3;
             this.gb_profile.TabStop = false;
             this.gb_profile.Text = "Thông tin tài khoản";
             // 
-            // txt_fullName
+            // btn_sua
             // 
-            this.txt_fullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.txt_fullName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_fullName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_fullName.ForeColor = System.Drawing.Color.White;
-            this.txt_fullName.Location = new System.Drawing.Point(197, 81);
-            this.txt_fullName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_fullName.Name = "txt_fullName";
-            this.txt_fullName.Size = new System.Drawing.Size(203, 25);
-            this.txt_fullName.TabIndex = 12;
+            this.btn_sua.ForeColor = System.Drawing.Color.Black;
+            this.btn_sua.Location = new System.Drawing.Point(871, 29);
+            this.btn_sua.Name = "btn_sua";
+            this.btn_sua.Size = new System.Drawing.Size(87, 34);
+            this.btn_sua.TabIndex = 16;
+            this.btn_sua.Text = "sữa";
+            this.btn_sua.UseVisualStyleBackColor = true;
             // 
-            // txt_email
+            // btn_chan
             // 
-            this.txt_email.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.txt_email.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_email.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_email.ForeColor = System.Drawing.Color.White;
-            this.txt_email.Location = new System.Drawing.Point(516, 41);
-            this.txt_email.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(203, 25);
-            this.txt_email.TabIndex = 13;
+            this.btn_chan.ForeColor = System.Drawing.Color.Black;
+            this.btn_chan.Location = new System.Drawing.Point(753, 29);
+            this.btn_chan.Name = "btn_chan";
+            this.btn_chan.Size = new System.Drawing.Size(87, 34);
+            this.btn_chan.TabIndex = 15;
+            this.btn_chan.Text = "Chặn";
+            this.btn_chan.UseVisualStyleBackColor = true;
             // 
-            // txt_userName
+            // txt_timkiemTen
             // 
-            this.txt_userName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.txt_userName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_userName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_userName.ForeColor = System.Drawing.Color.White;
-            this.txt_userName.Location = new System.Drawing.Point(197, 41);
-            this.txt_userName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txt_userName.Name = "txt_userName";
-            this.txt_userName.Size = new System.Drawing.Size(203, 25);
-            this.txt_userName.TabIndex = 14;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(13, 76);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 21);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Họ tên";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(441, 40);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 21);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Email";
+            this.txt_timkiemTen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
+            this.txt_timkiemTen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_timkiemTen.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_timkiemTen.ForeColor = System.Drawing.Color.White;
+            this.txt_timkiemTen.Location = new System.Drawing.Point(148, 33);
+            this.txt_timkiemTen.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_timkiemTen.Name = "txt_timkiemTen";
+            this.txt_timkiemTen.Size = new System.Drawing.Size(203, 25);
+            this.txt_timkiemTen.TabIndex = 14;
             // 
             // label3
             // 
@@ -131,37 +107,88 @@
             this.label3.Location = new System.Drawing.Point(13, 38);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 21);
+            this.label3.Size = new System.Drawing.Size(131, 21);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Tên người dùng";
+            this.label3.Text = "Tim liếm theo tên";
             // 
-            // dataGridView1
+            // dgv_nguoidung
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 146);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(995, 338);
-            this.dataGridView1.TabIndex = 4;
+            this.dgv_nguoidung.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_nguoidung.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_nguoidung.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dgv_nguoidung.Location = new System.Drawing.Point(11, 133);
+            this.dgv_nguoidung.Name = "dgv_nguoidung";
+            this.dgv_nguoidung.Size = new System.Drawing.Size(995, 351);
+            this.dgv_nguoidung.TabIndex = 4;
             // 
-            // button1
+            // ADMIN
             // 
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(516, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 34);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Chặn";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ADMIN.AutoSize = true;
+            this.ADMIN.Location = new System.Drawing.Point(356, 29);
+            this.ADMIN.Name = "ADMIN";
+            this.ADMIN.Size = new System.Drawing.Size(105, 34);
+            this.ADMIN.TabIndex = 17;
+            this.ADMIN.TabStop = true;
+            this.ADMIN.Text = "ADMIN";
+            this.ADMIN.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // QUANLY
             // 
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(632, 76);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 34);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "sữa";
-            this.button2.UseVisualStyleBackColor = true;
+            this.QUANLY.AutoSize = true;
+            this.QUANLY.Location = new System.Drawing.Point(521, 29);
+            this.QUANLY.Name = "QUANLY";
+            this.QUANLY.Size = new System.Drawing.Size(124, 34);
+            this.QUANLY.TabIndex = 18;
+            this.QUANLY.TabStop = true;
+            this.QUANLY.Text = "QUẢN LÝ";
+            this.QUANLY.UseVisualStyleBackColor = true;
+            // 
+            // NHAVIEN
+            // 
+            this.NHAVIEN.AutoSize = true;
+            this.NHAVIEN.Location = new System.Drawing.Point(356, 69);
+            this.NHAVIEN.Name = "NHAVIEN";
+            this.NHAVIEN.Size = new System.Drawing.Size(150, 34);
+            this.NHAVIEN.TabIndex = 19;
+            this.NHAVIEN.TabStop = true;
+            this.NHAVIEN.Text = "NHÂN VIÊN";
+            this.NHAVIEN.UseVisualStyleBackColor = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "STT";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "HỌ TÊN";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "EMAIL";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "NGAY TẠO";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "VAI TRÒ";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "HIỆN TRẠNG";
+            this.Column6.Name = "Column6";
             // 
             // FormNguoiDung
             // 
@@ -169,14 +196,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1018, 509);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_nguoidung);
             this.Controls.Add(this.gb_profile);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormNguoiDung";
             this.Text = "FormNguoiDung";
             this.gb_profile.ResumeLayout(false);
             this.gb_profile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_nguoidung)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -184,14 +211,19 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gb_profile;
-        private System.Windows.Forms.TextBox txt_fullName;
-        private System.Windows.Forms.TextBox txt_email;
-        private System.Windows.Forms.TextBox txt_userName;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txt_timkiemTen;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridView dgv_nguoidung;
+        private System.Windows.Forms.Button btn_chan;
+        private System.Windows.Forms.Button btn_sua;
+        private System.Windows.Forms.RadioButton NHAVIEN;
+        private System.Windows.Forms.RadioButton QUANLY;
+        private System.Windows.Forms.RadioButton ADMIN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
