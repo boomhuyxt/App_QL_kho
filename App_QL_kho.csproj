@@ -175,6 +175,7 @@
     <Compile Include="Forms\FormTrangChu.Designer.cs">
       <DependentUpon>FormTrangChu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaoCaoTong.cs" />
     <Compile Include="Models\Model_PhieuXuat.cs" />
     <Compile Include="Models\Model_TrangChu.cs" />
     <Compile Include="Program.cs" />
