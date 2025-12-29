@@ -124,5 +124,10 @@ namespace App_QL_kho.Forms
                 frm.ShowDialog();
             }
         }
+
+        private void dtp_ToDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

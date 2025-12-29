@@ -133,5 +133,10 @@ namespace App_QL_kho.Forms
                 MessageBox.Show("Lỗi lưu dữ liệu: " + errorMsg, "Lỗi SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void txt_Gmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

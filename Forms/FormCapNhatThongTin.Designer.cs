@@ -28,93 +28,97 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.txt_nguoidung = new System.Windows.Forms.TextBox();
             this.txt_Gmail = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.cb_vaitro = new System.Windows.Forms.ComboBox();
             this.btn_capnhat = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(77, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "tên người dùng";
             // 
             // txt_nguoidung
             // 
-            this.txt_nguoidung.Location = new System.Drawing.Point(227, 44);
-            this.txt_nguoidung.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_nguoidung.Location = new System.Drawing.Point(256, 80);
+            this.txt_nguoidung.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_nguoidung.Name = "txt_nguoidung";
-            this.txt_nguoidung.Size = new System.Drawing.Size(195, 22);
+            this.txt_nguoidung.Size = new System.Drawing.Size(219, 26);
             this.txt_nguoidung.TabIndex = 1;
             // 
             // txt_Gmail
             // 
-            this.txt_Gmail.Location = new System.Drawing.Point(227, 89);
-            this.txt_Gmail.Margin = new System.Windows.Forms.Padding(4);
+            this.txt_Gmail.Location = new System.Drawing.Point(256, 133);
+            this.txt_Gmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_Gmail.Name = "txt_Gmail";
-            this.txt_Gmail.Size = new System.Drawing.Size(195, 22);
+            this.txt_Gmail.Size = new System.Drawing.Size(219, 26);
             this.txt_Gmail.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(77, 94);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "gmail";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(77, 133);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "vai trò";
+            this.txt_Gmail.TextChanged += new System.EventHandler(this.txt_Gmail_TextChanged);
             // 
             // cb_vaitro
             // 
             this.cb_vaitro.FormattingEnabled = true;
-            this.cb_vaitro.Location = new System.Drawing.Point(227, 127);
-            this.cb_vaitro.Margin = new System.Windows.Forms.Padding(4);
+            this.cb_vaitro.Location = new System.Drawing.Point(256, 184);
+            this.cb_vaitro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cb_vaitro.Name = "cb_vaitro";
-            this.cb_vaitro.Size = new System.Drawing.Size(195, 24);
+            this.cb_vaitro.Size = new System.Drawing.Size(219, 28);
             this.cb_vaitro.TabIndex = 5;
             // 
             // btn_capnhat
             // 
-            this.btn_capnhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_capnhat.Location = new System.Drawing.Point(293, 198);
-            this.btn_capnhat.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_capnhat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(76)))), ((int)(((byte)(120)))));
+            this.btn_capnhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_capnhat.Font = new System.Drawing.Font("Segoe UI Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_capnhat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
+            this.btn_capnhat.Location = new System.Drawing.Point(330, 248);
+            this.btn_capnhat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_capnhat.Name = "btn_capnhat";
-            this.btn_capnhat.Size = new System.Drawing.Size(129, 37);
+            this.btn_capnhat.Size = new System.Drawing.Size(145, 46);
             this.btn_capnhat.TabIndex = 6;
             this.btn_capnhat.Text = "Cập nhật";
-            this.btn_capnhat.UseVisualStyleBackColor = true;
+            this.btn_capnhat.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(43, 76);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 32);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tên người dùng";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(43, 133);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 32);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Email";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(43, 187);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 32);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Vai trò";
             // 
             // FormCapNhatThongTin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(521, 287);
+            this.ClientSize = new System.Drawing.Size(586, 359);
             this.Controls.Add(this.btn_capnhat);
             this.Controls.Add(this.cb_vaitro);
             this.Controls.Add(this.label3);
@@ -122,7 +126,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txt_nguoidung);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormCapNhatThongTin";
             this.Text = "FormCapNhatThongTin";
             this.ResumeLayout(false);
@@ -131,13 +135,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_nguoidung;
         private System.Windows.Forms.TextBox txt_Gmail;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cb_vaitro;
         private System.Windows.Forms.Button btn_capnhat;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
