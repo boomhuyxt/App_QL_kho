@@ -250,7 +250,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\logo_crypto-removebg-preview1.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\profile.png" />
   </ItemGroup>
