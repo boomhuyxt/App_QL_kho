@@ -65,7 +65,7 @@
             this.pnl_filter.Controls.Add(this.label1);
             this.pnl_filter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_filter.Location = new System.Drawing.Point(0, 0);
-            this.pnl_filter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnl_filter.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_filter.Name = "pnl_filter";
             this.pnl_filter.Size = new System.Drawing.Size(1018, 509);
             this.pnl_filter.TabIndex = 1;
@@ -91,7 +91,7 @@
             "EXCEL",
             "WORD"});
             this.cb_XuatFile.Location = new System.Drawing.Point(459, 46);
-            this.cb_XuatFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_XuatFile.Margin = new System.Windows.Forms.Padding(2);
             this.cb_XuatFile.Name = "cb_XuatFile";
             this.cb_XuatFile.Size = new System.Drawing.Size(185, 21);
             this.cb_XuatFile.TabIndex = 13;
@@ -101,7 +101,7 @@
             // 
             this.panel1.Controls.Add(this.dgv_trangchu);
             this.panel1.Location = new System.Drawing.Point(2, 89);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1013, 410);
             this.panel1.TabIndex = 12;
@@ -109,7 +109,6 @@
             // dgv_trangchu
             // 
             this.dgv_trangchu.AllowUserToOrderColumns = true;
-            this.dgv_trangchu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_trangchu.BackgroundColor = System.Drawing.Color.Snow;
             this.dgv_trangchu.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -138,7 +137,7 @@
             this.dgv_trangchu.EnableHeadersVisualStyles = false;
             this.dgv_trangchu.GridColor = System.Drawing.Color.LightBlue;
             this.dgv_trangchu.Location = new System.Drawing.Point(8, -2);
-            this.dgv_trangchu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgv_trangchu.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_trangchu.Name = "dgv_trangchu";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -159,6 +158,7 @@
             this.Column1.MinimumWidth = 8;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            this.Column1.Width = 188;
             // 
             // Column2
             // 
@@ -166,6 +166,7 @@
             this.Column2.MinimumWidth = 8;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 188;
             // 
             // Column3
             // 
@@ -173,6 +174,7 @@
             this.Column3.MinimumWidth = 8;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Width = 189;
             // 
             // Column4
             // 
@@ -180,6 +182,7 @@
             this.Column4.MinimumWidth = 8;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            this.Column4.Width = 188;
             // 
             // Column5
             // 
@@ -187,11 +190,12 @@
             this.Column5.MinimumWidth = 8;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
+            this.Column5.Width = 188;
             // 
             // dtp_thoiGian
             // 
             this.dtp_thoiGian.Location = new System.Drawing.Point(459, 15);
-            this.dtp_thoiGian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtp_thoiGian.Margin = new System.Windows.Forms.Padding(2);
             this.dtp_thoiGian.Name = "dtp_thoiGian";
             this.dtp_thoiGian.Size = new System.Drawing.Size(185, 20);
             this.dtp_thoiGian.TabIndex = 11;
@@ -199,7 +203,7 @@
             // txt_sanPham
             // 
             this.txt_sanPham.Location = new System.Drawing.Point(177, 48);
-            this.txt_sanPham.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_sanPham.Margin = new System.Windows.Forms.Padding(2);
             this.txt_sanPham.Name = "txt_sanPham";
             this.txt_sanPham.Size = new System.Drawing.Size(213, 20);
             this.txt_sanPham.TabIndex = 10;
@@ -208,7 +212,7 @@
             // 
             this.cmb_nhomSP.FormattingEnabled = true;
             this.cmb_nhomSP.Location = new System.Drawing.Point(177, 13);
-            this.cmb_nhomSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmb_nhomSP.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_nhomSP.Name = "cmb_nhomSP";
             this.cmb_nhomSP.Size = new System.Drawing.Size(213, 21);
             this.cmb_nhomSP.TabIndex = 9;
@@ -256,7 +260,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1018, 509);
             this.Controls.Add(this.pnl_filter);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormDonHang";
             this.Text = "TrangChu";
             this.pnl_filter.ResumeLayout(false);

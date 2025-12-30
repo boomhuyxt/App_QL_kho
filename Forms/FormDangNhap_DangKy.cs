@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using App_QL_kho.Data;
+using System.Data.Entity;
 
 namespace App_QL_kho.Forms
 {
@@ -182,28 +183,50 @@ namespace App_QL_kho.Forms
                 return;
             }
 
-            using (var db = new Model1())
+            try
             {
-                string hashed = HashPassword(pass);
-                var user = db.NguoiDungs
-                    .FirstOrDefault(u => u.TenDangNhap == username && u.MatKhauHash == hashed);
-
-                if (user == null)
+                using (var db = new Model1())
                 {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi");
-                    return;
-                }
+                    string hashed = HashPassword(pass);
 
-                if (user.TrangThai == false)
-                {
-                    MessageBox.Show("Tài khoản đang bị khóa!", "Lỗi");
-                    return;
-                }
+                    // 1. Kiểm tra tài khoản mật khẩu
+                    var user = db.NguoiDungs
+                        .Include(u => u.VaiTroes)
+                        .FirstOrDefault(u => u.TenDangNhap == username && u.MatKhauHash == hashed);
 
-                FormAdmin frm = new FormAdmin();
-                this.Hide();
-                frm.ShowDialog();
-                this.Close();
+                    // LỖI: Cần thông báo nếu user null (sai tài khoản/mật khẩu)
+                    if (user == null)
+                    {
+                        MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!", "Lỗi đăng nhập");
+                        return;
+                    }
+
+                    // 2. Kiểm tra trạng thái khóa
+                    if (user.TrangThai == false)
+                    {
+                        MessageBox.Show("Tài khoản này hiện đang bị khóa!", "Thông báo");
+                        return;
+                    }
+
+                    // 3. Lấy danh sách vai trò (Đảm bảo thuộc tính là TenVaiTro)
+                    var danhSachVaiTro = user.VaiTroes.Select(v => v.TenVaiTro).ToList();
+
+                    if (danhSachVaiTro.Count == 0)
+                    {
+                        MessageBox.Show("Tài khoản chưa được cấp quyền truy cập hệ thống!", "Thông báo");
+                        return;
+                    }
+
+                    // 4. Mở Form chính
+                    FormAdmin frm = new FormAdmin(danhSachVaiTro);
+                    this.Hide();
+                    frm.ShowDialog();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
 
