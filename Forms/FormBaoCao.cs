@@ -80,10 +80,10 @@ namespace App_QL_kho.Forms
                     .Sum(ct => (decimal?)(ct.SoLuong * ct.SanPham.GiaXuat)) ?? 0;
 
                 // Hiển thị lên TextBox (định dạng tiền tệ VNĐ)
-                txt_giaNhap_thang.Text = tongNhapThang.ToString("N0") + " đ"; // Giá nhập tháng
-                txt_giaBan_thang.Text = tongXuatThang.ToString("N0") + " đ"; // Giá bán tháng
-                txt_giaNhap_nam.Text = tongNhapNam.ToString("N0") + " đ";   // Giá nhập năm
-                txt_giaBan_nam.Text = tongXuatNam.ToString("N0") + " đ";   // Giá bán năm
+                txt_gianhap_thang.Text = tongNhapThang.ToString("N0") + " đ"; // Giá nhập tháng
+                txt_giaban_thang.Text = tongXuatThang.ToString("N0") + " đ"; // Giá bán tháng
+                txt_gianhap_nam.Text = tongNhapNam.ToString("N0") + " đ";   // Giá nhập năm
+                txt_giaban_nam.Text = tongXuatNam.ToString("N0") + " đ";   // Giá bán năm
             }
         }
 
@@ -110,24 +110,28 @@ namespace App_QL_kho.Forms
 
         private void cb_chitietbaocao_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_chitietbaocao.SelectedItem == null) return;
+            if (cb_chitietbaocao.SelectedIndex == -1) return;
+
             string selectedItem = cb_chitietbaocao.SelectedItem.ToString();
-
-            if (selectedItem == "Báo cáo theo tháng")
+            switch (selectedItem)
             {
-                BaoCao_thang frm = new BaoCao_thang();
-                frm.ShowDialog();
-            }
-            else if (selectedItem == "Báo cáo theo năm")
-            {
-                BaoCaoNam frm = new BaoCaoNam();
-                frm.ShowDialog();
-            }
-        }
+                case "Báo cáo theo tháng":
+                    using (BaoCao_thang frm = new BaoCao_thang())
+                    {
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowDialog();
+                    }
+                    break;
 
-        private void dtp_ToDate_ValueChanged(object sender, EventArgs e)
-        {
-
+                case "Báo cáo theo năm":
+                    using (BaoCaoNam frm = new BaoCaoNam())
+                    {
+                        frm.StartPosition = FormStartPosition.CenterParent;
+                        frm.ShowDialog();
+                    }
+                    break;
+            }
+            cb_chitietbaocao.SelectedIndex = -1;
         }
     }
 }

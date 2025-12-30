@@ -10,17 +10,18 @@ namespace App_QL_kho.Forms
 {
     public partial class FormNguoiDung : Form
     {
-        // Danh sách gốc để phục vụ việc lọc và tìm kiếm
+        // Danh sách lưu trữ dữ liệu gốc để tìm kiếm và lọc nhanh
         private List<PhanQuyenNguoiDung> danhSachGoc = new List<PhanQuyenNguoiDung>();
 
         public FormNguoiDung()
         {
             InitializeComponent();
-            // Đăng ký các sự kiện
+
+            // Đăng ký các sự kiện hệ thống
             this.Load += FormNguoiDung_Load;
             this.txt_timkiemTen.TextChanged += Txt_timkiemTen_TextChanged;
 
-            // Đăng ký sự kiện cho các RadioButton
+            // Đăng ký sự kiện lọc cho các RadioButton
             ADMIN.CheckedChanged += RadioButton_CheckedChanged;
             QUANLY.CheckedChanged += RadioButton_CheckedChanged;
             NHANVIEN.CheckedChanged += RadioButton_CheckedChanged;
@@ -31,38 +32,34 @@ namespace App_QL_kho.Forms
             LoadDataNguoiDung();
         }
 
-        // 1. Truyền dữ liệu từ model PhanQuyenNguoiDung vào dgv_nguoidung
         private void LoadDataNguoiDung()
         {
             try
             {
                 using (var db = new Model1())
                 {
-                    // Thêm .AsNoTracking() để bỏ qua bộ nhớ đệm, lấy dữ liệu vừa cập nhật
-                    var rawData = db.NguoiDungs.AsNoTracking().Select(nd => new
-                    {
-                        nd.TenDangNhap,
-                        nd.Email,
-                        nd.NgayTao,
-                        nd.TrangThai,
-                        TenVaiTroes = nd.VaiTroes.Select(v => v.TenVaiTro)
-                    }).ToList();
+                    // Truy vấn Join 3 bảng để lấy danh sách người dùng và các vai trò tương ứng
+                    string sql = @"
+                SELECT 
+                    nd.MaND, 
+                    nd.TenDangNhap as TenNguoiDung, 
+                    nd.Email, 
+                    nd.NgayTao, 
+                    nd.TrangThai,
+                    STRING_AGG(vt.TenVaiTro, ', ') as TenVaiTro, 
+                    MIN(vt.MaVaiTro) as MaVaiTroDauTien
+                FROM NguoiDung nd
+                LEFT JOIN NguoiDung_VaiTro ndvt ON nd.MaND = ndvt.MaND
+                LEFT JOIN VaiTro vt ON ndvt.MaVaiTro = vt.MaVaiTro
+                GROUP BY nd.MaND, nd.TenDangNhap, nd.Email, nd.NgayTao, nd.TrangThai";
 
-                    danhSachGoc = rawData.Select(x => new PhanQuyenNguoiDung
-                    {
-                        TenNguoiDung = x.TenDangNhap,
-                        Email = x.Email,
-                        NgayTao = x.NgayTao,
-                        TrangThai = x.TrangThai,
-                        VaiTro = string.Join(", ", x.TenVaiTroes)
-                    }).ToList();
-
+                    danhSachGoc = db.Database.SqlQuery<PhanQuyenNguoiDung>(sql).ToList();
                     HienThiLenDgv(danhSachGoc);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+                MessageBox.Show("Lỗi hiển thị: " + ex.Message);
             }
         }
 
@@ -70,31 +67,33 @@ namespace App_QL_kho.Forms
         {
             dgv_nguoidung.Rows.Clear();
             int stt = 1;
+
             foreach (var item in ds)
             {
-                // Xác định văn bản cho cột HIỆN TRẠNG
                 string statusText = (item.TrangThai == true) ? "Hoạt động" : "Đã chặn";
 
-                // Thêm hàng theo ĐÚNG THỨ TỰ CỘT: 
-                // 1. STT | 2. HỌ TÊN | 3. EMAIL | 4. NGÀY TẠO | 5. VAI TRÒ | 6. HIỆN TRẠNG
-                dgv_nguoidung.Rows.Add(
-                    stt++,                             // STT
-                    item.TenNguoiDung,                 // HỌ TÊN
-                    item.Email,                        // EMAIL
-                    item.NgayTao?.ToString("dd/MM/yyyy"), // NGÀY TẠO
-                    item.VaiTro,                       // VAI TRÒ
-                    statusText                         // HIỆN TRẠNG
+                int rowIndex = dgv_nguoidung.Rows.Add(
+                    stt++,
+                    item.TenNguoiDung,
+                    item.Email,
+                    item.NgayTao?.ToString("dd/MM/yyyy"),
+                    item.TenVaiTro,
+                    statusText
                 );
+
+                // Kiểm tra trạng thái để đổi màu chữ hàng đó sang Đỏ nếu bị chặn
+                if (item.TrangThai == false)
+                {
+                    dgv_nguoidung.Rows[rowIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+                }
             }
         }
 
-        // 2. Chức năng tìm kiếm tương đối theo tên (txt_timkiemTen)
         private void Txt_timkiemTen_TextChanged(object sender, EventArgs e)
         {
             ThucHienLocTongHop();
         }
 
-        // 3. Chức năng lọc theo RadioButton (ADMIN, QUANLY, NHANVIEN)
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked)
@@ -103,37 +102,62 @@ namespace App_QL_kho.Forms
             }
         }
 
-        // Hàm bổ trợ để kết hợp cả Tìm kiếm và Lọc RadioButton
         private void ThucHienLocTongHop()
         {
             string keyword = txt_timkiemTen.Text.ToLower().Trim();
             var filtered = danhSachGoc.AsEnumerable();
 
-            // Lọc theo tên (tương đối)
+            // 1. Lọc theo từ khóa (Tìm kiếm tương đối trong Tên hoặc Email)
             if (!string.IsNullOrEmpty(keyword))
             {
-                filtered = filtered.Where(x => x.TenNguoiDung.ToLower().Contains(keyword));
+                filtered = filtered.Where(x =>
+                    (x.TenNguoiDung != null && x.TenNguoiDung.ToLower().Contains(keyword)) ||
+                    (x.Email != null && x.Email.ToLower().Contains(keyword)));
             }
 
-            // Lọc theo RadioButton quyền
-            if (ADMIN.Checked) filtered = filtered.Where(x => x.VaiTro.Contains("ADMIN"));
-            else if (QUANLY.Checked) filtered = filtered.Where(x => x.VaiTro.Contains("QUẢN LÝ"));
-            else if (NHANVIEN.Checked) filtered = filtered.Where(x => x.VaiTro.Contains("NHÂN VIÊN"));
+            // 2. Lọc theo vai trò (RadioButton)
+            if (ADMIN.Checked)
+                filtered = filtered.Where(x => x.TenVaiTro != null && x.TenVaiTro.ToUpper().Contains("ADMIN"));
+            else if (QUANLY.Checked)
+                filtered = filtered.Where(x => x.TenVaiTro != null && (x.TenVaiTro.Contains("QUẢN LÝ") || x.TenVaiTro.Contains("QUAN LY")));
+            else if (NHANVIEN.Checked)
+                filtered = filtered.Where(x => x.TenVaiTro != null && (x.TenVaiTro.Contains("NHÂN VIÊN") || x.TenVaiTro.Contains("NHAN VIEN")));
 
             HienThiLenDgv(filtered.ToList());
         }
 
+        private void btn_sua_Click(object sender, EventArgs e)
+        {
+            if (dgv_nguoidung.CurrentRow != null && dgv_nguoidung.CurrentRow.Cells[1].Value != null)
+            {
+                string tenND = dgv_nguoidung.CurrentRow.Cells[1].Value.ToString();
 
-        // 5. Chức năng btn_chan chuyển trạng thái thành "Đã chặn"
+                // Sử dụng 'using' để giải phóng tài nguyên Form ngay sau khi dùng
+                using (FormCapNhatThongTin frm = new FormCapNhatThongTin(tenND))
+                {
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadDataNguoiDung(); // Tải lại dữ liệu mới nhất
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn người dùng cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void btn_chan_Click(object sender, EventArgs e)
         {
+            if (dgv_nguoidung.CurrentRow == null || dgv_nguoidung.CurrentRow.Cells[1].Value == null) return;
 
-            if (dgv_nguoidung.CurrentRow == null) return;
-
-            // Lấy tên đăng nhập từ cột HỌ TÊN (Index 1) để tìm trong DB
             string tenND = dgv_nguoidung.CurrentRow.Cells[1].Value.ToString();
+            string trangThaiHienTai = dgv_nguoidung.CurrentRow.Cells[5].Value.ToString();
+            bool trangThaiMoi = (trangThaiHienTai != "Hoạt động");
 
-            if (MessageBox.Show($"Bạn có chắc chắn muốn chặn người dùng {tenND}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            string msg = trangThaiMoi ? $"Mở chặn người dùng {tenND}?" : $"Xác nhận chặn người dùng {tenND}?";
+
+            if (MessageBox.Show(msg, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
@@ -142,42 +166,16 @@ namespace App_QL_kho.Forms
                         var user = db.NguoiDungs.FirstOrDefault(x => x.TenDangNhap == tenND);
                         if (user != null)
                         {
-                            user.TrangThai = false;
-                            db.SaveChanges(); // Lưu vào SQL
-
-                            // QUAN TRỌNG: Cập nhật lại Grid ngay lập tức
-                            LoadDataNguoiDung();
-                            MessageBox.Show($"Đã chặn thành công người dùng: {tenND}");
+                            user.TrangThai = trangThaiMoi;
+                            db.SaveChanges();
+                            LoadDataNguoiDung(); // Làm mới danh sách
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi: " + ex.Message);
+                    MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        private void btn_sua_Click(object sender, EventArgs e)
-        {
-            if (dgv_nguoidung.CurrentRow != null)
-            {
-                // Lấy tên đăng nhập ở cột Index 1
-                string tenND = dgv_nguoidung.CurrentRow.Cells[1].Value.ToString();
-
-                // Sử dụng khối using để đảm bảo form con được giải phóng sau khi đóng
-                using (FormCapNhatThongTin frm = new FormCapNhatThongTin(tenND))
-                {
-                    // QUAN TRỌNG: Chỉ Load lại dữ liệu khi nút Cập nhật ở Form con trả về OK
-                    if (frm.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadDataNguoiDung(); // Hàm này phải lấy được dữ liệu mới nhất
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn người dùng cần sửa!");
             }
         }
     }

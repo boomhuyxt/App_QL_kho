@@ -31,7 +31,6 @@ namespace App_QL_kho.Forms
             {
                 using (var db = new Model1())
                 {
-                    // Sử dụng AsNoTracking để dữ liệu luôn mới và nhẹ bộ nhớ
                     var listVaiTro = db.VaiTroes.AsNoTracking().ToList();
                     cb_vaitro.DataSource = listVaiTro;
                     cb_vaitro.DisplayMember = "TenVaiTro";
@@ -50,7 +49,7 @@ namespace App_QL_kho.Forms
             {
                 using (var db = new Model1())
                 {
-                    // Tải người dùng kèm theo Vai trò hiện có
+                    // Nạp người dùng và danh sách vai trò kèm theo
                     var nd = db.NguoiDungs.Include(u => u.VaiTroes)
                                .FirstOrDefault(x => x.TenDangNhap == _tenDangNhap);
 
@@ -60,6 +59,7 @@ namespace App_QL_kho.Forms
                         txt_Gmail.Text = nd.Email;
                         txt_nguoidung.Enabled = false;
 
+                        // Hiển thị vai trò hiện tại (lấy vai trò đầu tiên nếu có)
                         var vaiTroHienTai = nd.VaiTroes.FirstOrDefault();
                         if (vaiTroHienTai != null)
                         {
@@ -76,51 +76,36 @@ namespace App_QL_kho.Forms
 
         private void btn_capnhat_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_Gmail.Text))
-            {
-                MessageBox.Show("Vui lòng nhập Email!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txt_Gmail.Focus();
-                return;
-            }
-
-            if (cb_vaitro.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn vai trò!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (cb_vaitro.SelectedValue == null) return;
 
             try
             {
                 using (var db = new Model1())
                 {
-                    // 1. Tìm thực thể cần cập nhật
-                    var nd = db.NguoiDungs.Include(u => u.VaiTroes)
-                               .FirstOrDefault(x => x.TenDangNhap == _tenDangNhap);
+                    // 1. Tải User kèm theo danh sách vai trò hiện tại (Eager Loading)
+                    var user = db.NguoiDungs.Include(u => u.VaiTroes)
+                                 .FirstOrDefault(x => x.TenDangNhap == _tenDangNhap);
 
-                    if (nd != null)
+                    if (user != null)
                     {
-                        // 2. Cập nhật các trường thông tin
-                        nd.Email = txt_Gmail.Text.Trim();
-
-                        // 3. Xử lý cập nhật Quan hệ Nhiều-Nhiều (Many-to-Many)
+                        // 2. Cập nhật Email
+                        user.Email = txt_Gmail.Text.Trim();
                         int maVaiTroMoi = Convert.ToInt32(cb_vaitro.SelectedValue);
 
-                        // Xóa toàn bộ vai trò cũ để tránh trùng lặp hoặc lỗi khóa chính
-                        nd.VaiTroes.Clear();
+                        // 3. Cập nhật bảng trung gian NguoiDung_VaiTro
+                        // EF sẽ tự động xóa dòng cũ và thêm dòng mới trong bảng trung gian
+                        user.VaiTroes.Clear(); // Xóa các vai trò cũ
 
-                        // Tìm thực thể vai trò mới từ DB của Context hiện tại
-                        var vaiTroMoi = db.VaiTroes.FirstOrDefault(v => v.MaVaiTro == maVaiTroMoi);
+                        var vaiTroMoi = db.VaiTroes.Find(maVaiTroMoi);
                         if (vaiTroMoi != null)
                         {
-                            nd.VaiTroes.Add(vaiTroMoi);
+                            user.VaiTroes.Add(vaiTroMoi); // Thêm vai trò mới vào tập hợp
                         }
 
                         // 4. Lưu thay đổi
                         db.SaveChanges();
 
-                        MessageBox.Show("Cập nhật thông tin thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // 5. Trả về kết quả và Đóng Form
+                        MessageBox.Show("Cập nhật thành công!");
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
@@ -128,15 +113,8 @@ namespace App_QL_kho.Forms
             }
             catch (Exception ex)
             {
-                // Hiển thị lỗi chi tiết (bao gồm cả InnerException nếu có)
-                string errorMsg = ex.InnerException != null ? ex.InnerException.InnerException.Message : ex.Message;
-                MessageBox.Show("Lỗi lưu dữ liệu: " + errorMsg, "Lỗi SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi cập nhật: " + ex.Message);
             }
-        }
-
-        private void txt_Gmail_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

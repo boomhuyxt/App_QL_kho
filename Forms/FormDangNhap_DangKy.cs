@@ -13,7 +13,8 @@ namespace App_QL_kho.Forms
         public FormDangNhap_DangKy()
         {
             InitializeComponent();
-            // Đảm bảo các nút đã được gán sự kiện
+            GanSuKienPlaceholder();
+
             btn_login.Click += btn_login_Click;
             btn_register.Click += btn_register_Click;
         }
@@ -23,7 +24,7 @@ namespace App_QL_kho.Forms
             HienThiPanelDangNhap();
         }
 
-        #region XỬ LÝ GIAO DIỆN (PANEL & PLACEHOLDER)
+        #region GIAO DIỆN + PLACEHOLDER
 
         private void HienThiPanelDangNhap()
         {
@@ -45,6 +46,7 @@ namespace App_QL_kho.Forms
         {
             CaiDatPlaceholder(txt_usernameLogin, "Tên đăng nhập");
             CaiDatPlaceholder(txt_loginPassword, "Mật khẩu", true);
+
             CaiDatPlaceholder(txt_emailRegister, "Email");
             CaiDatPlaceholder(txt_usernameRegister, "Tên đăng nhập");
             CaiDatPlaceholder(txt_passwordRegister, "Mật khẩu", true);
@@ -63,9 +65,10 @@ namespace App_QL_kho.Forms
             if (txt.Text == placeholder)
             {
                 txt.Text = "";
-                txt.ForeColor = Color.White; // Đổi thành trắng cho nền tối
-                if (isPass) txt.UseSystemPasswordChar = true;
             }
+
+            txt.ForeColor = Color.White; // CHỮ NHẬP MÀU TRẮNG
+            if (isPass) txt.UseSystemPasswordChar = true;
         }
 
         private void XyLyLeave(TextBox txt, string placeholder, bool isPass = false)
@@ -78,26 +81,42 @@ namespace App_QL_kho.Forms
             }
         }
 
-        // --- GÁN SỰ KIỆN CHO TEXTBOX ---
-        private void txt_usernameLogin_Enter(object sender, EventArgs e) => XyLyEnter(txt_usernameLogin, "Tên đăng nhập");
-        private void txt_usernameLogin_Leave(object sender, EventArgs e) => XyLyLeave(txt_usernameLogin, "Tên đăng nhập");
-        private void txt_loginPassword_Enter(object sender, EventArgs e) => XyLyEnter(txt_loginPassword, "Mật khẩu", true);
-        private void txt_loginPassword_Leave(object sender, EventArgs e) => XyLyLeave(txt_loginPassword, "Mật khẩu", true);
-        private void txt_emailRegister_Enter(object sender, EventArgs e) => XyLyEnter(txt_emailRegister, "Email");
-        private void txt_emailRegister_Leave(object sender, EventArgs e) => XyLyLeave(txt_emailRegister, "Email");
-        private void txt_usernameRegister_Enter(object sender, EventArgs e) => XyLyEnter(txt_usernameRegister, "Tên đăng nhập");
-        private void txt_usernameRegister_Leave(object sender, EventArgs e) => XyLyLeave(txt_usernameRegister, "Tên đăng nhập");
-        private void txt_passwordRegister_Enter(object sender, EventArgs e) => XyLyEnter(txt_passwordRegister, "Mật khẩu", true);
-        private void txt_passwordRegister_Leave(object sender, EventArgs e) => XyLyLeave(txt_passwordRegister, "Mật khẩu", true);
-        private void txt_confirmPasswordRegister_Enter(object sender, EventArgs e) => XyLyEnter(txt_confirmPasswordRegister, "Xác nhận mật khẩu", true);
-        private void txt_confirmPasswordRegister_Leave(object sender, EventArgs e) => XyLyLeave(txt_confirmPasswordRegister, "Xác nhận mật khẩu", true);
+        private void GanSuKienPlaceholder()
+        {
+            // LOGIN
+            txt_usernameLogin.Enter += (s, e) => XyLyEnter(txt_usernameLogin, "Tên đăng nhập");
+            txt_usernameLogin.Leave += (s, e) => XyLyLeave(txt_usernameLogin, "Tên đăng nhập");
 
-        private void link_register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => HienThiPanelDangKy();
-        private void link_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => HienThiPanelDangNhap();
+            txt_loginPassword.Enter += (s, e) => XyLyEnter(txt_loginPassword, "Mật khẩu", true);
+            txt_loginPassword.Leave += (s, e) => XyLyLeave(txt_loginPassword, "Mật khẩu", true);
+
+            // REGISTER
+            txt_emailRegister.Enter += (s, e) => XyLyEnter(txt_emailRegister, "Email");
+            txt_emailRegister.Leave += (s, e) => XyLyLeave(txt_emailRegister, "Email");
+
+            txt_usernameRegister.Enter += (s, e) => XyLyEnter(txt_usernameRegister, "Tên đăng nhập");
+            txt_usernameRegister.Leave += (s, e) => XyLyLeave(txt_usernameRegister, "Tên đăng nhập");
+
+            txt_passwordRegister.Enter += (s, e) => XyLyEnter(txt_passwordRegister, "Mật khẩu", true);
+            txt_passwordRegister.Leave += (s, e) => XyLyLeave(txt_passwordRegister, "Mật khẩu", true);
+
+            txt_confirmPasswordRegister.Enter += (s, e) => XyLyEnter(txt_confirmPasswordRegister, "Xác nhận mật khẩu", true);
+            txt_confirmPasswordRegister.Leave += (s, e) => XyLyLeave(txt_confirmPasswordRegister, "Xác nhận mật khẩu", true);
+        }
+
+        private void link_register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            HienThiPanelDangKy();
+        }
+
+        private void link_login_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            HienThiPanelDangNhap();
+        }
 
         #endregion
 
-        #region XỬ LÝ LOGIC SQL
+        #region LOGIC SQL
 
         private string HashPassword(string password)
         {
@@ -117,43 +136,39 @@ namespace App_QL_kho.Forms
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông báo");
                 return;
             }
 
             if (pass != confirm)
             {
-                MessageBox.Show("Mật khẩu xác nhận không khớp!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Mật khẩu xác nhận không khớp!", "Lỗi");
                 return;
             }
 
-            try
+            using (var db = new Model1())
             {
-                using (var db = new Model1())
+                if (db.NguoiDungs.Any(u => u.TenDangNhap == username))
                 {
-                    if (db.NguoiDungs.Any(u => u.TenDangNhap == username))
-                    {
-                        MessageBox.Show("Tên đăng nhập đã tồn tại!", "Lỗi");
-                        return;
-                    }
-
-                    // TẠO ĐỐI TƯỢNG KHỚP VỚI SQL MỚI (Không có HoTen)
-                    var nd = new NguoiDung
-                    {
-                        TenDangNhap = username,
-                        Email = email,
-                        MatKhauHash = HashPassword(pass),
-                        TrangThai = true,
-                        NgayTao = DateTime.Now
-                    };
-
-                    db.NguoiDungs.Add(nd);
-                    db.SaveChanges();
-                    MessageBox.Show("Đăng ký thành công!", "Thông báo");
-                    HienThiPanelDangNhap();
+                    MessageBox.Show("Tên đăng nhập đã tồn tại!", "Lỗi");
+                    return;
                 }
+
+                var nd = new NguoiDung
+                {
+                    TenDangNhap = username,
+                    Email = email,
+                    MatKhauHash = HashPassword(pass),
+                    TrangThai = true,
+                    NgayTao = DateTime.Now
+                };
+
+                db.NguoiDungs.Add(nd);
+                db.SaveChanges();
+
+                MessageBox.Show("Đăng ký thành công!", "Thông báo");
+                HienThiPanelDangNhap();
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi hệ thống: " + ex.Message); }
         }
 
         private void btn_login_Click(object sender, EventArgs e)
@@ -169,28 +184,36 @@ namespace App_QL_kho.Forms
 
             using (var db = new Model1())
             {
-                string hashedInput = HashPassword(pass);
-                var user = db.NguoiDungs.FirstOrDefault(u => u.TenDangNhap == username && u.MatKhauHash == hashedInput);
+                string hashed = HashPassword(pass);
+                var user = db.NguoiDungs
+                    .FirstOrDefault(u => u.TenDangNhap == username && u.MatKhauHash == hashed);
 
-                if (user != null)
+                if (user == null)
                 {
-                    if (user.TrangThai == false)
-                    {
-                        MessageBox.Show("Tài khoản đang bị khóa!", "Lỗi");
-                        return;
-                    }
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi");
+                    return;
+                }
 
-                    FormAdmin frm = new FormAdmin();
-                    this.Hide();
-                    frm.ShowDialog();
-                    this.Close();
-                }
-                else
+                if (user.TrangThai == false)
                 {
-                    MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tài khoản đang bị khóa!", "Lỗi");
+                    return;
                 }
+
+                FormAdmin frm = new FormAdmin();
+                this.Hide();
+                frm.ShowDialog();
+                this.Close();
             }
         }
+
         #endregion
+
+        private void link_forgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormForgotPassword frm = new FormForgotPassword();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
     }
 }
