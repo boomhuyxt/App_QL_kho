@@ -37,15 +37,21 @@
             this.txt_matkhaumoi = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.An = new System.Windows.Forms.PictureBox();
+            this.hien = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.An)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hien)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.An);
+            this.panel1.Controls.Add(this.hien);
             this.panel1.Controls.Add(this.btn_xacNhan);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
@@ -153,6 +159,28 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Đặt lại mật khẩu";
             // 
+            // An
+            // 
+            this.An.BackgroundImage = global::App_QL_kho.Properties.Resources.car;
+            this.An.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.An.Location = new System.Drawing.Point(210, 150);
+            this.An.Name = "An";
+            this.An.Size = new System.Drawing.Size(25, 25);
+            this.An.TabIndex = 9;
+            this.An.TabStop = false;
+            this.An.Click += new System.EventHandler(this.An_Click);
+            // 
+            // hien
+            // 
+            this.hien.BackgroundImage = global::App_QL_kho.Properties.Resources.home;
+            this.hien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hien.Location = new System.Drawing.Point(241, 150);
+            this.hien.Name = "hien";
+            this.hien.Size = new System.Drawing.Size(25, 25);
+            this.hien.TabIndex = 10;
+            this.hien.TabStop = false;
+            this.hien.Click += new System.EventHandler(this.hien_Click);
+            // 
             // FormDoiMatKhau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -170,6 +198,8 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.An)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hien)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,5 +215,7 @@
         private System.Windows.Forms.TextBox txt_matkhaumoi;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox An;
+        private System.Windows.Forms.PictureBox hien;
     }
 }

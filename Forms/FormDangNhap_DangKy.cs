@@ -16,8 +16,17 @@ namespace App_QL_kho.Forms
             InitializeComponent();
             GanSuKienPlaceholder();
 
+            // Gán sự kiện cho các nút chính
             btn_login.Click += btn_login_Click;
             btn_register.Click += btn_register_Click;
+
+            // --- GÁN SỰ KIỆN NÚT MẮT (LOGIN) ---
+            if (An != null) An.Click += An_Click;
+            if (hien != null) hien.Click += hien_Click;
+
+            // --- GÁN SỰ KIỆN NÚT MẮT (REGISTER) --- 
+            if (AnRegister != null) AnRegister.Click += AnRegister_Click;
+            if (hienRegister != null) hienRegister.Click += hienRegister_Click;
         }
 
         private void FormDangNhap_DangKy_Load(object sender, EventArgs e)
@@ -33,6 +42,17 @@ namespace App_QL_kho.Forms
             pnl_register.Visible = false;
             pnl_login.BringToFront();
             ResetFields();
+
+            // Setup nút mắt Login
+            if (hien != null && An != null)
+            {
+                hien.Visible = true;
+                An.Visible = false;
+            }
+
+            // Đặt ẩn mật khẩu
+            if (txt_loginPassword.Text != "Mật khẩu")
+                txt_loginPassword.UseSystemPasswordChar = true;
         }
 
         private void HienThiPanelDangKy()
@@ -41,6 +61,17 @@ namespace App_QL_kho.Forms
             pnl_register.Visible = true;
             pnl_register.BringToFront();
             ResetFields();
+
+            // Setup nút mắt Register
+            if (hienRegister != null && AnRegister != null)
+            {
+                hienRegister.Visible = true;
+                AnRegister.Visible = false;
+            }
+
+            // Đảm bảo xóa sạch ký tự che mặc định của Designer
+            txt_passwordRegister.PasswordChar = '\0';
+            txt_confirmPasswordRegister.PasswordChar = '\0';
         }
 
         private void ResetFields()
@@ -58,9 +89,15 @@ namespace App_QL_kho.Forms
         {
             txt.Text = text;
             txt.ForeColor = Color.Gray;
-            if (isPassword) txt.UseSystemPasswordChar = false;
+            // Nếu là placeholder thì luôn hiện chữ (không ẩn *)
+            if (isPassword)
+            {
+                txt.UseSystemPasswordChar = false;
+                txt.PasswordChar = '\0'; // Đảm bảo hiện chữ hướng dẫn
+            }
         }
 
+        // --- HÀM XỬ LÝ ENTER ---
         private void XyLyEnter(TextBox txt, string placeholder, bool isPass = false)
         {
             if (txt.Text == placeholder)
@@ -68,8 +105,37 @@ namespace App_QL_kho.Forms
                 txt.Text = "";
             }
 
-            txt.ForeColor = Color.White; // CHỮ NHẬP MÀU TRẮNG
-            if (isPass) txt.UseSystemPasswordChar = true;
+            txt.ForeColor = Color.White;
+
+            if (isPass)
+            {
+                // 1. LOGIC CHO LOGIN
+                if (txt == txt_loginPassword)
+                {
+                    if (hien != null && hien.Visible == false) // Đang xem pass
+                    {
+                        txt.UseSystemPasswordChar = false;
+                        txt.PasswordChar = '\0';
+                    }
+                    else
+                    {
+                        txt.UseSystemPasswordChar = true;
+                    }
+                }
+                // 2. LOGIC CHO REGISTER (Áp dụng cho cả 2 ô)
+                else if (txt == txt_passwordRegister || txt == txt_confirmPasswordRegister)
+                {
+                    if (hienRegister != null && hienRegister.Visible == false) // Đang xem pass
+                    {
+                        txt.UseSystemPasswordChar = false;
+                        txt.PasswordChar = '\0';
+                    }
+                    else
+                    {
+                        txt.UseSystemPasswordChar = true;
+                    }
+                }
+            }
         }
 
         private void XyLyLeave(TextBox txt, string placeholder, bool isPass = false)
@@ -78,7 +144,11 @@ namespace App_QL_kho.Forms
             {
                 txt.Text = placeholder;
                 txt.ForeColor = Color.Gray;
-                if (isPass) txt.UseSystemPasswordChar = false;
+                if (isPass)
+                {
+                    txt.UseSystemPasswordChar = false;
+                    txt.PasswordChar = '\0';
+                }
             }
         }
 
@@ -114,6 +184,75 @@ namespace App_QL_kho.Forms
         {
             HienThiPanelDangNhap();
         }
+
+        // --- SỰ KIỆN NÚT ẨN / HIỆN MẬT KHẨU (LOGIN) ---
+        private void An_Click(object sender, EventArgs e)
+        {
+            if (txt_loginPassword.Text != "Mật khẩu")
+            {
+                txt_loginPassword.UseSystemPasswordChar = true;
+                An.Visible = false;
+                hien.Visible = true;
+            }
+        }
+
+        private void hien_Click(object sender, EventArgs e)
+        {
+            if (txt_loginPassword.Text != "Mật khẩu")
+            {
+                // Sửa lỗi: Phải gán PasswordChar về rỗng thì mới hiện chữ được
+                txt_loginPassword.PasswordChar = '\0';
+                txt_loginPassword.UseSystemPasswordChar = false;
+
+                hien.Visible = false;
+                An.Visible = true;
+            }
+        }
+
+        // --- SỰ KIỆN NÚT ẨN / HIỆN MẬT KHẨU (REGISTER) ---
+        private void AnRegister_Click(object sender, EventArgs e)
+        {
+            // 1. Chỉ ẩn nếu đó là mật khẩu thật (màu không phải xám)
+
+            if (txt_passwordRegister.ForeColor != Color.Gray)
+            {
+                txt_passwordRegister.UseSystemPasswordChar = true;
+            }
+
+            if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
+            {
+                txt_confirmPasswordRegister.UseSystemPasswordChar = true;
+            }
+
+            // 2. Đổi trạng thái nút
+            AnRegister.Visible = false;
+            hienRegister.Visible = true;
+        }
+
+        private void hienRegister_Click(object sender, EventArgs e)
+        {
+            // 1. Xóa ký tự che (BẮT BUỘC)
+            txt_passwordRegister.PasswordChar = '\0';
+            txt_confirmPasswordRegister.PasswordChar = '\0';
+
+            // 2. Kiểm tra dựa trên MÀU SẮC (Chính xác hơn so sánh chữ)
+            // Nếu màu chữ KHÁC màu xám (tức là người dùng đã nhập) thì cho hiện ra
+
+            if (txt_passwordRegister.ForeColor != Color.Gray)
+            {
+                txt_passwordRegister.UseSystemPasswordChar = false;
+            }
+
+            if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
+            {
+                txt_confirmPasswordRegister.UseSystemPasswordChar = false;
+            }
+
+            // 3. Đổi trạng thái nút
+            hienRegister.Visible = false;
+            AnRegister.Visible = true;
+        }
+
 
         #endregion
 
@@ -189,26 +328,22 @@ namespace App_QL_kho.Forms
                 {
                     string hashed = HashPassword(pass);
 
-                    // 1. Kiểm tra tài khoản mật khẩu
                     var user = db.NguoiDungs
                         .Include(u => u.VaiTroes)
                         .FirstOrDefault(u => u.TenDangNhap == username && u.MatKhauHash == hashed);
 
-                    // LỖI: Cần thông báo nếu user null (sai tài khoản/mật khẩu)
                     if (user == null)
                     {
                         MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!", "Lỗi đăng nhập");
                         return;
                     }
 
-                    // 2. Kiểm tra trạng thái khóa
                     if (user.TrangThai == false)
                     {
                         MessageBox.Show("Tài khoản này hiện đang bị khóa!", "Thông báo");
                         return;
                     }
 
-                    // 3. Lấy danh sách vai trò (Đảm bảo thuộc tính là TenVaiTro)
                     var danhSachVaiTro = user.VaiTroes.Select(v => v.TenVaiTro).ToList();
 
                     if (danhSachVaiTro.Count == 0)
@@ -217,7 +352,6 @@ namespace App_QL_kho.Forms
                         return;
                     }
 
-                    // 4. Mở Form chính
                     FormAdmin frm = new FormAdmin(danhSachVaiTro);
                     this.Hide();
                     frm.ShowDialog();
@@ -229,7 +363,6 @@ namespace App_QL_kho.Forms
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message);
             }
         }
-
         #endregion
 
         private void link_forgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

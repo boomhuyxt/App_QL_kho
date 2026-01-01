@@ -23,9 +23,9 @@ namespace App_QL_kho.Forms
         private void FormForgotPassword_Load(object sender, EventArgs e)
         {
             // 1. Setup Placeholder
-            SetupTextBox(txt_emailForgotPassword, PLACEHOLDER_EMAIL);
-            SetupTextBox(txt_MaXacThuc, PLACEHOLDER_CODE);
-            txt_MaXacThuc.UseSystemPasswordChar = false;
+            SetupTextBox(txt_matkhau1, PLACEHOLDER_EMAIL);
+            SetupTextBox(txt_matkhau2, PLACEHOLDER_CODE);
+            txt_matkhau2.UseSystemPasswordChar = false;
 
             // 2. Mặc định ẩn Panel nhập mã (panel6)
             panel6.Visible = false;
@@ -40,35 +40,35 @@ namespace App_QL_kho.Forms
         // --- Xử lý sự kiện Enter/Leave (Giữ nguyên như cũ) ---
         private void txt_emailForgotPassword_Enter(object sender, EventArgs e)
         {
-            if (txt_emailForgotPassword.Text == PLACEHOLDER_EMAIL)
+            if (txt_matkhau1.Text == PLACEHOLDER_EMAIL)
             {
-                txt_emailForgotPassword.Text = "";
-                txt_emailForgotPassword.ForeColor = Color.White;
+                txt_matkhau1.Text = "";
+                txt_matkhau1.ForeColor = Color.White;
             }
         }
 
         private void txt_emailForgotPassword_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_emailForgotPassword.Text))
+            if (string.IsNullOrWhiteSpace(txt_matkhau1.Text))
             {
-                SetupTextBox(txt_emailForgotPassword, PLACEHOLDER_EMAIL);
+                SetupTextBox(txt_matkhau1, PLACEHOLDER_EMAIL);
             }
         }
 
         private void txt_MaXacThuc_Enter(object sender, EventArgs e)
         {
-            if (txt_MaXacThuc.Text == PLACEHOLDER_CODE)
+            if (txt_matkhau2.Text == PLACEHOLDER_CODE)
             {
-                txt_MaXacThuc.Text = "";
-                txt_MaXacThuc.ForeColor = Color.White;
+                txt_matkhau2.Text = "";
             }
+            txt_matkhau2.ForeColor = Color.White;
         }
 
         private void txt_MaXacThuc_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_MaXacThuc.Text))
+            if (string.IsNullOrWhiteSpace(txt_matkhau2.Text))
             {
-                SetupTextBox(txt_MaXacThuc, PLACEHOLDER_CODE);
+                SetupTextBox(txt_matkhau2, PLACEHOLDER_CODE);
             }
         }
 
@@ -78,7 +78,7 @@ namespace App_QL_kho.Forms
             // TRƯỜNG HỢP 1: Chưa gửi mã (Panel nhập mã đang ẩn)
             if (panel6.Visible == false)
             {
-                string emailInput = txt_emailForgotPassword.Text.Trim();
+                string emailInput = txt_matkhau1.Text.Trim();
 
                 if (emailInput == PLACEHOLDER_EMAIL || string.IsNullOrEmpty(emailInput))
                 {
@@ -113,7 +113,7 @@ namespace App_QL_kho.Forms
             // TRƯỜNG HỢP 2: Đang nhập mã xác thực (Panel nhập mã đang hiện)
             else
             {
-                if (txt_MaXacThuc.Text == randomCode)
+                if (txt_matkhau2.Text == randomCode)
                 {
                     MessageBox.Show("Xác thực thành công!", "Thông báo");
 
