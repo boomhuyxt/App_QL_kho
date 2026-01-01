@@ -1,6 +1,6 @@
 ﻿namespace App_QL_kho.Forms
 {
-    partial class FormForgotPassword
+    partial class FormDoiMatKhau
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForgotPassword));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_xacNhan = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.txt_MaXacThuc = new System.Windows.Forms.TextBox();
+            this.txt_nhaplaimatkhau = new System.Windows.Forms.TextBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.txt_emailForgotPassword = new System.Windows.Forms.TextBox();
+            this.txt_matkhaumoi = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -51,11 +50,11 @@
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(18, 19);
+            this.panel1.Location = new System.Drawing.Point(46, 28);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(281, 252);
-            this.panel1.TabIndex = 0;
+            this.panel1.TabIndex = 1;
             // 
             // btn_xacNhan
             // 
@@ -75,7 +74,7 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.txt_MaXacThuc);
+            this.panel6.Controls.Add(this.txt_nhaplaimatkhau);
             this.panel6.Controls.Add(this.pictureBox5);
             this.panel6.Location = new System.Drawing.Point(20, 115);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
@@ -83,19 +82,18 @@
             this.panel6.Size = new System.Drawing.Size(241, 33);
             this.panel6.TabIndex = 5;
             // 
-            // txt_MaXacThuc
+            // txt_nhaplaimatkhau
             // 
-            this.txt_MaXacThuc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.txt_MaXacThuc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_MaXacThuc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_MaXacThuc.ForeColor = System.Drawing.Color.White;
-            this.txt_MaXacThuc.Location = new System.Drawing.Point(29, 5);
-            this.txt_MaXacThuc.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_MaXacThuc.Name = "txt_MaXacThuc";
-            this.txt_MaXacThuc.Size = new System.Drawing.Size(207, 18);
-            this.txt_MaXacThuc.TabIndex = 1;
-            this.txt_MaXacThuc.UseSystemPasswordChar = true;
-            this.txt_MaXacThuc.TextChanged += new System.EventHandler(this.txt_MaXacThuc_Enter);
+            this.txt_nhaplaimatkhau.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
+            this.txt_nhaplaimatkhau.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_nhaplaimatkhau.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_nhaplaimatkhau.ForeColor = System.Drawing.Color.White;
+            this.txt_nhaplaimatkhau.Location = new System.Drawing.Point(29, 5);
+            this.txt_nhaplaimatkhau.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_nhaplaimatkhau.Name = "txt_nhaplaimatkhau";
+            this.txt_nhaplaimatkhau.Size = new System.Drawing.Size(207, 18);
+            this.txt_nhaplaimatkhau.TabIndex = 1;
+            this.txt_nhaplaimatkhau.UseSystemPasswordChar = true;
             // 
             // pictureBox5
             // 
@@ -112,7 +110,7 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.txt_emailForgotPassword);
+            this.panel5.Controls.Add(this.txt_matkhaumoi);
             this.panel5.Controls.Add(this.pictureBox4);
             this.panel5.Location = new System.Drawing.Point(20, 58);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
@@ -120,19 +118,17 @@
             this.panel5.Size = new System.Drawing.Size(241, 33);
             this.panel5.TabIndex = 7;
             // 
-            // txt_emailForgotPassword
+            // txt_matkhaumoi
             // 
-            this.txt_emailForgotPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.txt_emailForgotPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_emailForgotPassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_emailForgotPassword.ForeColor = System.Drawing.Color.White;
-            this.txt_emailForgotPassword.Location = new System.Drawing.Point(31, 8);
-            this.txt_emailForgotPassword.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_emailForgotPassword.Name = "txt_emailForgotPassword";
-            this.txt_emailForgotPassword.Size = new System.Drawing.Size(207, 18);
-            this.txt_emailForgotPassword.TabIndex = 1;
-            this.txt_emailForgotPassword.Enter += new System.EventHandler(this.txt_emailForgotPassword_Enter);
-            this.txt_emailForgotPassword.Leave += new System.EventHandler(this.txt_emailForgotPassword_Leave);
+            this.txt_matkhaumoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
+            this.txt_matkhaumoi.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_matkhaumoi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_matkhaumoi.ForeColor = System.Drawing.Color.White;
+            this.txt_matkhaumoi.Location = new System.Drawing.Point(31, 8);
+            this.txt_matkhaumoi.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_matkhaumoi.Name = "txt_matkhaumoi";
+            this.txt_matkhaumoi.Size = new System.Drawing.Size(207, 18);
+            this.txt_matkhaumoi.TabIndex = 1;
             // 
             // pictureBox4
             // 
@@ -157,18 +153,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Đặt lại mật khẩu";
             // 
-            // FormForgotPassword
+            // FormDoiMatKhau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(321, 292);
+            this.ClientSize = new System.Drawing.Size(362, 308);
             this.Controls.Add(this.panel1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "FormForgotPassword";
-            this.Text = "FormForgotPassword";
-            this.Load += new System.EventHandler(this.FormForgotPassword_Load);
+            this.Name = "FormDoiMatKhau";
+            this.Text = "FormDoiMatKhau";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -184,13 +177,13 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_xacNhan;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.TextBox txt_MaXacThuc;
+        private System.Windows.Forms.TextBox txt_nhaplaimatkhau;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox txt_emailForgotPassword;
+        private System.Windows.Forms.TextBox txt_matkhaumoi;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Button btn_xacNhan;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -147,6 +147,12 @@
     <Compile Include="Forms\FormDangNhap_DangKy.Designer.cs">
       <DependentUpon>FormDangNhap_DangKy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormDoiMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDoiMatKhau.Designer.cs">
+      <DependentUpon>FormDoiMatKhau.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDangNhap_DangKy.resx">
       <DependentUpon>FormDangNhap_DangKy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDoiMatKhau.resx">
+      <DependentUpon>FormDoiMatKhau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDonHang.resx">
       <DependentUpon>FormDonHang.cs</DependentUpon>

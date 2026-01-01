@@ -69,6 +69,8 @@ namespace App_QL_kho.Forms
             // Người dùng
             tsb_nguoidung.Click += (s, e) => OpenChildForm(new FormNguoiDung());
             tsl_nguoidung.Click += (s, e) => OpenChildForm(new FormNguoiDung());
+
+            btn_logout.Click += Btn_logout_Click;
         }
 
         private void OpenChildForm(Form childForm)
@@ -125,10 +127,32 @@ namespace App_QL_kho.Forms
                 }
             }));
         }
-
-        private void toolStrip_Menu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void Btn_logout_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?",
+                                                  "Xác nhận",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
 
+            if (result == DialogResult.Yes)
+            {
+                // Sử dụng luồng chạy mới để khởi động lại ứng dụng hoặc mở Form đăng nhập
+                // Cách an toàn nhất là chạy luồng đăng nhập trước khi đóng form Admin
+
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(OpenLoginForm));
+                thread.SetApartmentState(System.Threading.ApartmentState.STA);
+                thread.Start();
+
+                // Đóng form hiện tại
+                this.Close();
+            }
         }
+
+        // Hàm phụ để chạy luồng mới
+        private void OpenLoginForm()
+        {
+            Application.Run(new FormDangNhap_DangKy());
+        }
+
     }
 }
