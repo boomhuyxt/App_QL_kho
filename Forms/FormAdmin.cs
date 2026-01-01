@@ -125,5 +125,10 @@ namespace App_QL_kho.Forms
                 }
             }));
         }
+
+        private void toolStrip_Menu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }
