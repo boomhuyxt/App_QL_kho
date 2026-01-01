@@ -33,35 +33,54 @@ namespace App_QL_kho.Forms
         {
             using (var db = new Model1())
             {
+                // Lấy mốc thời gian từ giao diện
                 DateTime fromDate = dtp_FromDate.Value.Date;
-                DateTime toDate = dtp_ToDate.Value.Date.AddDays(1).AddTicks(-1);
+                DateTime toDate = dtp_ToDate.Value.Date.AddDays(1).AddTicks(-1); // Hết ngày toDate
+                int selectedYear = fromDate.Year; // Lấy năm dựa trên ngày bắt đầu người dùng chọn
 
-                // --- 1. XỬ LÝ DỮ LIỆU THEO THÁNG (Hiển thị từng ngày trong tháng) ---
+                // --- 1. XỬ LÝ BIỂU ĐỒ THÁNG (Cột là NGÀY) ---
+                // Lấy dữ liệu bán hàng trong khoảng thời gian chọn, nhóm theo NGÀY
                 var dataTheoNgay = db.CT_PhieuXuat
                     .Where(ct => ct.PhieuXuat.NgayXuat >= fromDate && ct.PhieuXuat.NgayXuat <= toDate)
-                    .GroupBy(ct => ct.PhieuXuat.NgayXuat.Value.Day)
-                    .Select(g => new { Ngay = g.Key, DoanhThu = g.Sum(x => x.SoLuong * (x.SanPham.GiaXuat ?? 0)) })
+                    .GroupBy(ct => ct.PhieuXuat.NgayXuat.Value.Day) // Nhóm theo ngày (1, 2, 3...)
+                    .Select(g => new
+                    {
+                        Ngay = g.Key,
+                        DoanhThu = g.Sum(x => x.SoLuong * (x.SanPham.GiaXuat ?? 0))
+                    })
                     .OrderBy(x => x.Ngay)
                     .ToList();
 
-                UpdateChart(chart_thang, dataTheoNgay.Select(x => x.Ngay.ToString()).ToArray(),
-                            dataTheoNgay.Select(x => (double)x.DoanhThu).ToArray(), "Doanh thu theo ngày");
+                // Cập nhật chart_thang: Trục X là Ngày, Trục Y là Doanh thu
+                UpdateChart(chart_thang,
+                            dataTheoNgay.Select(x => "Ngày " + x.Ngay).ToArray(),
+                            dataTheoNgay.Select(x => (double)x.DoanhThu).ToArray(),
+                            "Doanh thu theo ngày");
 
-                // --- 2. XỬ LÝ DỮ LIỆU THEO NĂM (Hiển thị từng tháng trong năm) ---
-                int currentYear = DateTime.Now.Year;
+
+                // --- 2. XỬ LÝ BIỂU ĐỒ NĂM (Cột là THÁNG) ---
+                // Lấy dữ liệu của cả NĂM được chọn (dựa trên selectedYear), nhóm theo THÁNG
                 var dataTheoThang = db.CT_PhieuXuat
-                    .Where(ct => ct.PhieuXuat.NgayXuat.Value.Year == currentYear)
-                    .GroupBy(ct => ct.PhieuXuat.NgayXuat.Value.Month)
-                    .Select(g => new { Thang = g.Key, DoanhThu = g.Sum(x => x.SoLuong * (x.SanPham.GiaXuat ?? 0)) })
+                    .Where(ct => ct.PhieuXuat.NgayXuat.Value.Year == selectedYear)
+                    .GroupBy(ct => ct.PhieuXuat.NgayXuat.Value.Month) // Nhóm theo tháng (1, 2...12)
+                    .Select(g => new
+                    {
+                        Thang = g.Key,
+                        DoanhThu = g.Sum(x => x.SoLuong * (x.SanPham.GiaXuat ?? 0))
+                    })
                     .OrderBy(x => x.Thang)
                     .ToList();
 
-                UpdateChart(chart_nam, dataTheoThang.Select(x => "T" + x.Thang).ToArray(),
-                            dataTheoThang.Select(x => (double)x.DoanhThu).ToArray(), "Doanh thu theo tháng");
+                // Cập nhật chart_nam: Trục X là Tháng, Trục Y là Doanh thu
+                UpdateChart(chart_nam,
+                            dataTheoThang.Select(x => "Tháng " + x.Thang).ToArray(),
+                            dataTheoThang.Select(x => (double)x.DoanhThu).ToArray(),
+                            $"Doanh thu năm {selectedYear}");
 
-                // --- 3. TÍNH TỔNG TIỀN CHO CÁC TEXTBOX ---
 
-                // Tính cho Tháng đang chọn trên DateTimePicker
+                // --- 3. TÍNH TOÁN SỐ LIỆU TỔNG QUÁT (Hiển thị ra TextBox) ---
+
+                // Tổng nhập/xuất trong khoảng thời gian chọn (theo ngày/tháng đang filter)
                 decimal tongNhapThang = db.CT_PhieuNhap
                     .Where(ct => ct.PhieuNhap.NgayNhap >= fromDate && ct.PhieuNhap.NgayNhap <= toDate)
                     .Sum(ct => (decimal?)(ct.SoLuong * ct.SanPham.GiaNhap)) ?? 0;
@@ -70,42 +89,51 @@ namespace App_QL_kho.Forms
                     .Where(ct => ct.PhieuXuat.NgayXuat >= fromDate && ct.PhieuXuat.NgayXuat <= toDate)
                     .Sum(ct => (decimal?)(ct.SoLuong * ct.SanPham.GiaXuat)) ?? 0;
 
-                // Tính cho cả Năm hiện tại
+                // Tổng nhập/xuất của cả NĂM được chọn
                 decimal tongNhapNam = db.CT_PhieuNhap
-                    .Where(ct => ct.PhieuNhap.NgayNhap.Value.Year == currentYear)
+                    .Where(ct => ct.PhieuNhap.NgayNhap.Value.Year == selectedYear)
                     .Sum(ct => (decimal?)(ct.SoLuong * ct.SanPham.GiaNhap)) ?? 0;
 
                 decimal tongXuatNam = db.CT_PhieuXuat
-                    .Where(ct => ct.PhieuXuat.NgayXuat.Value.Year == currentYear)
+                    .Where(ct => ct.PhieuXuat.NgayXuat.Value.Year == selectedYear)
                     .Sum(ct => (decimal?)(ct.SoLuong * ct.SanPham.GiaXuat)) ?? 0;
 
-                // Hiển thị lên TextBox (định dạng tiền tệ VNĐ)
-                txt_gianhap_thang.Text = tongNhapThang.ToString("N0") + " đ"; // Giá nhập tháng
-                txt_giaban_thang.Text = tongXuatThang.ToString("N0") + " đ"; // Giá bán tháng
-                txt_gianhap_nam.Text = tongNhapNam.ToString("N0") + " đ";   // Giá nhập năm
-                txt_giaban_nam.Text = tongXuatNam.ToString("N0") + " đ";   // Giá bán năm
+                // Gán giá trị vào TextBox, định dạng tiền tệ
+                txt_gianhap_thang.Text = tongNhapThang.ToString("N0") + " đ";
+                txt_giaban_thang.Text = tongXuatThang.ToString("N0") + " đ";
+                txt_gianhap_nam.Text = tongNhapNam.ToString("N0") + " đ";
+                txt_giaban_nam.Text = tongXuatNam.ToString("N0") + " đ";
             }
         }
 
         private void UpdateChart(Chart chart, string[] xValues, double[] yValues, string seriesName)
         {
-            chart.Series.Clear();
+            chart.Series.Clear(); // Xóa dữ liệu cũ
+            chart.Legends.Clear(); // Xóa chú thích cũ để tránh trùng lặp
+
+            // Tạo Series mới
             Series series = new Series(seriesName)
             {
-                ChartType = SeriesChartType.Column, // Biểu đồ cột
+                ChartType = SeriesChartType.Column, // Loại biểu đồ cột
                 XValueType = ChartValueType.String,
-                IsValueShownAsLabel = true // Hiện số trên đầu cột
+                IsValueShownAsLabel = true // Hiển thị giá trị trên đầu cột
             };
 
+            // Đổ dữ liệu vào Series
             for (int i = 0; i < xValues.Length; i++)
             {
                 series.Points.AddXY(xValues[i], yValues[i]);
             }
 
+            // Thêm Series vào Chart
             chart.Series.Add(series);
+            chart.Legends.Add(new Legend("Legend1")); // Thêm lại Legend
+
+            // Cấu hình trục
             chart.ChartAreas[0].AxisX.Interval = 1;
             chart.ChartAreas[0].AxisX.Title = "Thời gian";
             chart.ChartAreas[0].AxisY.Title = "Số tiền (VNĐ)";
+            chart.ChartAreas[0].RecalculateAxesScale(); // Tính toán lại tỉ lệ trục
         }
 
         private void cb_chitietbaocao_SelectedIndexChanged(object sender, EventArgs e)
