@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDoiMatKhau));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_xacNhan = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -181,6 +182,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(543, 474);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormDoiMatKhau";
             this.Text = "FormDoiMatKhau";

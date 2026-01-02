@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDonHang));
             this.pnl_filter = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.cb_XuatFile = new System.Windows.Forms.ComboBox();
@@ -245,6 +246,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1527, 783);
             this.Controls.Add(this.pnl_filter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormDonHang";
             this.Text = "TrangChu";
             this.pnl_filter.ResumeLayout(false);
