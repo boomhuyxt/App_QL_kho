@@ -178,6 +178,9 @@ namespace App_QL_kho.Forms
                     MessageBox.Show("Lỗi khi gửi mail: " + ex.Message + "\n\n(Hãy chắc chắn bạn đã nhập đúng Email của mình ở dòng fromEmail)");
                 }
             }
-        
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
