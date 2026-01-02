@@ -11,6 +11,9 @@ namespace App_QL_kho.Forms
 {
     public partial class FormDangNhap_DangKy : Form
     {
+        // Track whether register password fields are currently visible (unmasked)
+        private bool registerPasswordsVisible = false;
+
         public FormDangNhap_DangKy()
         {
             InitializeComponent();
@@ -62,7 +65,8 @@ namespace App_QL_kho.Forms
             pnl_register.BringToFront();
             ResetFields();
 
-            // Setup nút mắt Register
+            // Setup nút mắt Register -> mặc định là ẩn (mask)
+            registerPasswordsVisible = false;
             if (hienRegister != null && AnRegister != null)
             {
                 hienRegister.Visible = true;
@@ -70,8 +74,9 @@ namespace App_QL_kho.Forms
             }
 
             // Đảm bảo xóa sạch ký tự che mặc định của Designer
-            txt_passwordRegister.PasswordChar = '\0';
-            txt_confirmPasswordRegister.PasswordChar = '\0';
+            // UseSystemPasswordChar=false để hiển thị placeholder text
+            txt_passwordRegister.UseSystemPasswordChar = false;
+            txt_confirmPasswordRegister.UseSystemPasswordChar = false;
         }
 
         private void ResetFields()
@@ -125,14 +130,22 @@ namespace App_QL_kho.Forms
                 // 2. LOGIC CHO REGISTER (Áp dụng cho cả 2 ô)
                 else if (txt == txt_passwordRegister || txt == txt_confirmPasswordRegister)
                 {
-                    if (hienRegister != null && hienRegister.Visible == false) // Đang xem pass
+                    // Ensure both register password fields reflect the shared visibility state
+                    if (registerPasswordsVisible)
                     {
-                        txt.UseSystemPasswordChar = false;
-                        txt.PasswordChar = '\0';
+                        txt_passwordRegister.PasswordChar = '\0';
+                        txt_confirmPasswordRegister.PasswordChar = '\0';
+
+                        txt_passwordRegister.UseSystemPasswordChar = false;
+                        txt_confirmPasswordRegister.UseSystemPasswordChar = false;
                     }
                     else
                     {
-                        txt.UseSystemPasswordChar = true;
+                        // Only mask if user has typed (not placeholder)
+                        if (txt_passwordRegister.ForeColor != Color.Gray)
+                            txt_passwordRegister.UseSystemPasswordChar = true;
+                        if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
+                            txt_confirmPasswordRegister.UseSystemPasswordChar = true;
                     }
                 }
             }
@@ -146,8 +159,24 @@ namespace App_QL_kho.Forms
                 txt.ForeColor = Color.Gray;
                 if (isPass)
                 {
+                    // show placeholder text (no masking)
                     txt.UseSystemPasswordChar = false;
                     txt.PasswordChar = '\0';
+
+                    // If both are placeholders, ensure both show placeholder style
+                    if (txt == txt_passwordRegister || txt == txt_confirmPasswordRegister)
+                    {
+                        if (txt_passwordRegister.ForeColor == Color.Gray)
+                        {
+                            txt_passwordRegister.UseSystemPasswordChar = false;
+                            txt_passwordRegister.PasswordChar = '\0';
+                        }
+                        if (txt_confirmPasswordRegister.ForeColor == Color.Gray)
+                        {
+                            txt_confirmPasswordRegister.UseSystemPasswordChar = false;
+                            txt_confirmPasswordRegister.PasswordChar = '\0';
+                        }
+                    }
                 }
             }
         }
@@ -209,20 +238,40 @@ namespace App_QL_kho.Forms
             }
         }
 
+        // Helper để đồng bộ ẩn/hiện cho cả hai ô mật khẩu Register
+        private void SetRegisterPasswordVisibility(bool visible)
+        {
+            registerPasswordsVisible = visible;
+
+            if (visible)
+            {
+                // Hiện mật khẩu (không mask)
+                txt_passwordRegister.PasswordChar = '\0';
+                txt_confirmPasswordRegister.PasswordChar = '\0';
+
+                txt_passwordRegister.UseSystemPasswordChar = false;
+                txt_confirmPasswordRegister.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                // Ẩn mật khẩu (mask) — chỉ khi người dùng đã nhập (màu khác xám)
+                if (txt_passwordRegister.ForeColor != Color.Gray)
+                    txt_passwordRegister.UseSystemPasswordChar = true;
+                else
+                    txt_passwordRegister.UseSystemPasswordChar = false; // giữ placeholder hiển thị
+
+                if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
+                    txt_confirmPasswordRegister.UseSystemPasswordChar = true;
+                else
+                    txt_confirmPasswordRegister.UseSystemPasswordChar = false; // giữ placeholder hiển thị
+            }
+        }
+
         // --- SỰ KIỆN NÚT ẨN / HIỆN MẬT KHẨU (REGISTER) ---
         private void AnRegister_Click(object sender, EventArgs e)
         {
-            // 1. Chỉ ẩn nếu đó là mật khẩu thật (màu không phải xám)
-
-            if (txt_passwordRegister.ForeColor != Color.Gray)
-            {
-                txt_passwordRegister.UseSystemPasswordChar = true;
-            }
-
-            if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
-            {
-                txt_confirmPasswordRegister.UseSystemPasswordChar = true;
-            }
+            // Ẩn cả 2 ô (mask)
+            SetRegisterPasswordVisibility(false);
 
             // 2. Đổi trạng thái nút
             AnRegister.Visible = false;
@@ -231,22 +280,8 @@ namespace App_QL_kho.Forms
 
         private void hienRegister_Click(object sender, EventArgs e)
         {
-            // 1. Xóa ký tự che (BẮT BUỘC)
-            txt_passwordRegister.PasswordChar = '\0';
-            txt_confirmPasswordRegister.PasswordChar = '\0';
-
-            // 2. Kiểm tra dựa trên MÀU SẮC (Chính xác hơn so sánh chữ)
-            // Nếu màu chữ KHÁC màu xám (tức là người dùng đã nhập) thì cho hiện ra
-
-            if (txt_passwordRegister.ForeColor != Color.Gray)
-            {
-                txt_passwordRegister.UseSystemPasswordChar = false;
-            }
-
-            if (txt_confirmPasswordRegister.ForeColor != Color.Gray)
-            {
-                txt_confirmPasswordRegister.UseSystemPasswordChar = false;
-            }
+            // Hiện cả 2 ô (unmask)
+            SetRegisterPasswordVisibility(true);
 
             // 3. Đổi trạng thái nút
             hienRegister.Visible = false;
