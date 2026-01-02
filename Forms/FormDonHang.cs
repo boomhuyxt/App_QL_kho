@@ -67,40 +67,47 @@ namespace App_QL_kho.Forms
             {
                 using (var db = new Model1())
                 {
-                    DateTime selectedDate = dtp_thoiGian.Value.Date;
-                    var query = from sp in db.SanPhams
-                                join nhom in db.NhomSanPhams on sp.MaNhom equals nhom.MaNhom
-                                select new
-                                {
-                                    MaSP = sp.MaSP,
-                                    TenNhom = nhom.TenNhom,
-                                    TenSP = sp.TenSP,
-                                    TonKho = sp.SoLuong,
-                                    GiaBan = sp.GiaXuat,
-                                    NgayNhap = db.CT_PhieuNhap.Where(ct => ct.MaSP == sp.MaSP).Max(ct => (DateTime?)ct.PhieuNhap.NgayNhap)
-                                };
+                    // Lấy toàn bộ danh sách sản phẩm làm gốc
+                    var query = db.SanPhams.AsQueryable();
 
+                    // 1. Lọc theo tên sản phẩm (nếu có nhập)
                     if (!string.IsNullOrWhiteSpace(txt_sanPham.Text))
-                        query = query.Where(x => x.TenSP.ToLower().Contains(txt_sanPham.Text.ToLower()));
-
-                    if (cmb_nhomSP.SelectedValue != null && (int)cmb_nhomSP.SelectedValue != -1)
-                        query = query.Where(x => x.TenNhom == cmb_nhomSP.Text);
-
-                    query = query.Where(x => x.NgayNhap >= selectedDate);
-
-                    dgv_trangchu.DataSource = query.ToList().Select((x, index) => new Model_TrangChu
                     {
-                        Stt = index + 1,
-                        MaSP = x.MaSP,
-                        TenNhom = x.TenNhom,
-                        TenSP = x.TenSP,
-                        TonKho = x.TonKho,
-                        GiaBan = x.GiaBan,
-                        NgayNhapGanNhat = x.NgayNhap
-                    }).ToList();
+                        string search = txt_sanPham.Text.ToLower();
+                        query = query.Where(x => x.TenSP.ToLower().Contains(search));
+                    }
+
+                    // 2. Lọc theo nhóm sản phẩm (nếu chọn nhóm cụ thể)
+                    if (cmb_nhomSP.SelectedValue != null && (int)cmb_nhomSP.SelectedValue != -1)
+                    {
+                        int maNhom = (int)cmb_nhomSP.SelectedValue;
+                        query = query.Where(x => x.MaNhom == maNhom);
+                    }
+
+                    // Thực thi truy vấn và chuyển đổi sang Model hiển thị
+                    var resultList = query.ToList()
+                                         .Select((x, index) => new Model_TrangChu
+                                         {
+                                             Stt = index + 1,
+                                             MaSP = x.MaSP,
+                                             // Lấy tên nhóm từ navigation property
+                                             TenNhom = x.NhomSanPham?.TenNhom ?? "Chưa phân nhóm",
+                                             TenSP = x.TenSP,
+                                             TonKho = x.SoLuong,
+                                             GiaBan = x.GiaXuat,
+                                             // Vẫn lấy ngày nhập mới nhất để tham khảo nhưng không dùng để lọc mất sản phẩm
+                                             NgayNhapGanNhat = db.CT_PhieuNhap
+                                                                 .Where(ct => ct.MaSP == x.MaSP)
+                                                                 .Max(ct => (DateTime?)ct.PhieuNhap.NgayNhap)
+                                         }).ToList();
+
+                    dgv_trangchu.DataSource = resultList;
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi lọc dữ liệu: " + ex.Message);
+            }
         }
 
         // --- XỬ LÝ XUẤT FILE ---

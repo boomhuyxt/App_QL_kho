@@ -323,12 +323,14 @@ namespace App_QL_kho.Forms
 
             using (var db = new Model1())
             {
+                // 1. Kiểm tra tên đăng nhập đã tồn tại chưa
                 if (db.NguoiDungs.Any(u => u.TenDangNhap == username))
                 {
                     MessageBox.Show("Tên đăng nhập đã tồn tại!", "Lỗi");
                     return;
                 }
 
+                // 2. Tạo đối tượng người dùng mới
                 var nd = new NguoiDung
                 {
                     TenDangNhap = username,
@@ -338,10 +340,39 @@ namespace App_QL_kho.Forms
                     NgayTao = DateTime.Now
                 };
 
+                // --- BẮT ĐẦU LOGIC GÁN QUYỀN ADMIN CHO TÀI KHOẢN ĐẦU TIÊN ---
+
+                // Kiểm tra xem đây có phải là tài khoản đầu tiên trong hệ thống không
+                bool isFirstUser = !db.NguoiDungs.Any();
+
+                if (isFirstUser)
+                {
+                    // Tìm vai trò Admin trong bảng VaiTroes
+                    // Lưu ý: Đảm bảo trong Database của bạn đã có dòng dữ liệu "Admin" trong bảng VaiTroes
+                    var adminRole = db.VaiTroes.FirstOrDefault(r => r.TenVaiTro == "Admin" || r.MaVaiTro == 1);
+
+                    if (adminRole != null)
+                    {
+                        // Gán vai trò Admin cho người dùng đầu tiên
+                        nd.VaiTroes.Add(adminRole);
+                    }
+                }
+                else
+                {
+                    // Nếu không phải tài khoản đầu tiên, bạn có thể gán vai trò "User" mặc định nếu muốn
+                    var userRole = db.VaiTroes.FirstOrDefault(r => r.TenVaiTro == "Nhân viên" || r.TenVaiTro == "User");
+                    if (userRole != null)
+                    {
+                        nd.VaiTroes.Add(userRole);
+                    }
+                }
+
+                // --- KẾT THÚC LOGIC GÁN QUYỀN ---
+
                 db.NguoiDungs.Add(nd);
                 db.SaveChanges();
 
-                MessageBox.Show("Đăng ký thành công!", "Thông báo");
+                MessageBox.Show(isFirstUser ? "Đăng ký tài khoản Admin thành công!" : "Đăng ký thành công!", "Thông báo");
                 HienThiPanelDangNhap();
             }
         }

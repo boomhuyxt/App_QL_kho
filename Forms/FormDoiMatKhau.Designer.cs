@@ -30,21 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDoiMatKhau));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.hien = new System.Windows.Forms.PictureBox();
             this.btn_xacNhan = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.txt_nhaplaimatkhau = new System.Windows.Forms.TextBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txt_matkhaumoi = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.hien = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.An = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hien)).BeginInit();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.An)).BeginInit();
             this.SuspendLayout();
@@ -57,19 +57,32 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.An);
-            this.panel1.Location = new System.Drawing.Point(69, 43);
+            this.panel1.Location = new System.Drawing.Point(46, 28);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(422, 388);
+            this.panel1.Size = new System.Drawing.Size(281, 252);
             this.panel1.TabIndex = 1;
+            // 
+            // hien
+            // 
+            this.hien.BackgroundImage = global::App_QL_kho.Properties.Resources.show;
+            this.hien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.hien.Location = new System.Drawing.Point(235, 150);
+            this.hien.Name = "hien";
+            this.hien.Size = new System.Drawing.Size(25, 25);
+            this.hien.TabIndex = 10;
+            this.hien.TabStop = false;
+            this.hien.Click += new System.EventHandler(this.hien_Click);
             // 
             // btn_xacNhan
             // 
             this.btn_xacNhan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(76)))), ((int)(((byte)(120)))));
             this.btn_xacNhan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_xacNhan.Font = new System.Drawing.Font("Segoe UI Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_xacNhan.Location = new System.Drawing.Point(100, 277);
+            this.btn_xacNhan.Location = new System.Drawing.Point(67, 180);
+            this.btn_xacNhan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_xacNhan.Name = "btn_xacNhan";
-            this.btn_xacNhan.Size = new System.Drawing.Size(226, 58);
+            this.btn_xacNhan.Size = new System.Drawing.Size(151, 38);
             this.btn_xacNhan.TabIndex = 8;
             this.btn_xacNhan.Text = "Xác nhận";
             this.btn_xacNhan.UseVisualStyleBackColor = false;
@@ -81,9 +94,10 @@
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.txt_nhaplaimatkhau);
             this.panel6.Controls.Add(this.pictureBox5);
-            this.panel6.Location = new System.Drawing.Point(30, 177);
+            this.panel6.Location = new System.Drawing.Point(20, 115);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(360, 50);
+            this.panel6.Size = new System.Drawing.Size(241, 33);
             this.panel6.TabIndex = 5;
             // 
             // txt_nhaplaimatkhau
@@ -92,11 +106,23 @@
             this.txt_nhaplaimatkhau.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_nhaplaimatkhau.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_nhaplaimatkhau.ForeColor = System.Drawing.Color.White;
-            this.txt_nhaplaimatkhau.Location = new System.Drawing.Point(44, 8);
+            this.txt_nhaplaimatkhau.Location = new System.Drawing.Point(29, 5);
+            this.txt_nhaplaimatkhau.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txt_nhaplaimatkhau.Name = "txt_nhaplaimatkhau";
-            this.txt_nhaplaimatkhau.Size = new System.Drawing.Size(310, 27);
+            this.txt_nhaplaimatkhau.Size = new System.Drawing.Size(207, 18);
             this.txt_nhaplaimatkhau.TabIndex = 1;
             this.txt_nhaplaimatkhau.UseSystemPasswordChar = true;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::App_QL_kho.Properties.Resources.enter;
+            this.pictureBox5.Location = new System.Drawing.Point(3, 5);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(23, 23);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
             // 
             // panel5
             // 
@@ -104,9 +130,10 @@
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.txt_matkhaumoi);
             this.panel5.Controls.Add(this.pictureBox4);
-            this.panel5.Location = new System.Drawing.Point(30, 89);
+            this.panel5.Location = new System.Drawing.Point(20, 58);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(360, 50);
+            this.panel5.Size = new System.Drawing.Size(241, 33);
             this.panel5.TabIndex = 7;
             // 
             // txt_matkhaumoi
@@ -115,85 +142,64 @@
             this.txt_matkhaumoi.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txt_matkhaumoi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_matkhaumoi.ForeColor = System.Drawing.Color.White;
-            this.txt_matkhaumoi.Location = new System.Drawing.Point(46, 12);
+            this.txt_matkhaumoi.Location = new System.Drawing.Point(31, 8);
+            this.txt_matkhaumoi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txt_matkhaumoi.Name = "txt_matkhaumoi";
-            this.txt_matkhaumoi.Size = new System.Drawing.Size(310, 27);
+            this.txt_matkhaumoi.Size = new System.Drawing.Size(207, 18);
             this.txt_matkhaumoi.TabIndex = 1;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::App_QL_kho.Properties.Resources.locked_computer;
+            this.pictureBox4.Location = new System.Drawing.Point(3, 5);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(23, 23);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Black", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(68, 26);
+            this.label1.Location = new System.Drawing.Point(45, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(278, 45);
+            this.label1.Size = new System.Drawing.Size(190, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đặt lại mật khẩu";
-            // 
-            // hien
-            // 
-            this.hien.BackgroundImage = global::App_QL_kho.Properties.Resources.show;
-            this.hien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.hien.Location = new System.Drawing.Point(352, 231);
-            this.hien.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.hien.Name = "hien";
-            this.hien.Size = new System.Drawing.Size(38, 38);
-            this.hien.TabIndex = 10;
-            this.hien.TabStop = false;
-            this.hien.Click += new System.EventHandler(this.hien_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::App_QL_kho.Properties.Resources.enter;
-            this.pictureBox5.Location = new System.Drawing.Point(4, 8);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(34, 35);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::App_QL_kho.Properties.Resources.locked_computer;
-            this.pictureBox4.Location = new System.Drawing.Point(4, 8);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(34, 35);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
             // 
             // An
             // 
             this.An.BackgroundImage = global::App_QL_kho.Properties.Resources.close_eye;
             this.An.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.An.Location = new System.Drawing.Point(352, 231);
-            this.An.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.An.Location = new System.Drawing.Point(235, 150);
             this.An.Name = "An";
-            this.An.Size = new System.Drawing.Size(38, 38);
+            this.An.Size = new System.Drawing.Size(25, 25);
             this.An.TabIndex = 9;
             this.An.TabStop = false;
             this.An.Click += new System.EventHandler(this.An_Click);
             // 
             // FormDoiMatKhau
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(543, 474);
+            this.ClientSize = new System.Drawing.Size(362, 308);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormDoiMatKhau";
-            this.Text = "FormDoiMatKhau";
+            this.Text = "Đổi Mật Khẩu";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hien)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hien)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.An)).EndInit();
             this.ResumeLayout(false);

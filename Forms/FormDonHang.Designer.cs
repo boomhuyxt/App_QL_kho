@@ -66,8 +66,9 @@
             this.pnl_filter.Controls.Add(this.label1);
             this.pnl_filter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnl_filter.Location = new System.Drawing.Point(0, 0);
+            this.pnl_filter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnl_filter.Name = "pnl_filter";
-            this.pnl_filter.Size = new System.Drawing.Size(1527, 783);
+            this.pnl_filter.Size = new System.Drawing.Size(1018, 509);
             this.pnl_filter.TabIndex = 1;
             // 
             // label3
@@ -75,9 +76,10 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(591, 74);
+            this.label3.Location = new System.Drawing.Point(394, 48);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 28);
+            this.label3.Size = new System.Drawing.Size(58, 19);
             this.label3.TabIndex = 14;
             this.label3.Text = "Xuất file";
             // 
@@ -89,24 +91,25 @@
             "PDF",
             "EXCEL",
             "WORD"});
-            this.cb_XuatFile.Location = new System.Drawing.Point(688, 71);
+            this.cb_XuatFile.Location = new System.Drawing.Point(459, 46);
+            this.cb_XuatFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cb_XuatFile.Name = "cb_XuatFile";
-            this.cb_XuatFile.Size = new System.Drawing.Size(276, 28);
+            this.cb_XuatFile.Size = new System.Drawing.Size(185, 21);
             this.cb_XuatFile.TabIndex = 13;
             this.cb_XuatFile.SelectedIndexChanged += new System.EventHandler(this.cb_XuatFile_SelectedIndexChanged);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.dgv_trangchu);
-            this.panel1.Location = new System.Drawing.Point(3, 137);
+            this.panel1.Location = new System.Drawing.Point(2, 89);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1520, 631);
+            this.panel1.Size = new System.Drawing.Size(1013, 410);
             this.panel1.TabIndex = 12;
             // 
             // dgv_trangchu
             // 
             this.dgv_trangchu.AllowUserToOrderColumns = true;
-            this.dgv_trangchu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgv_trangchu.BackgroundColor = System.Drawing.Color.Snow;
             this.dgv_trangchu.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -134,7 +137,8 @@
             this.dgv_trangchu.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_trangchu.EnableHeadersVisualStyles = false;
             this.dgv_trangchu.GridColor = System.Drawing.Color.LightBlue;
-            this.dgv_trangchu.Location = new System.Drawing.Point(12, -3);
+            this.dgv_trangchu.Location = new System.Drawing.Point(8, -2);
+            this.dgv_trangchu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgv_trangchu.Name = "dgv_trangchu";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -146,7 +150,7 @@
             this.dgv_trangchu.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_trangchu.RowHeadersWidth = 62;
             this.dgv_trangchu.RowTemplate.Height = 28;
-            this.dgv_trangchu.Size = new System.Drawing.Size(1504, 631);
+            this.dgv_trangchu.Size = new System.Drawing.Size(1003, 410);
             this.dgv_trangchu.TabIndex = 3;
             // 
             // Column1
@@ -155,6 +159,7 @@
             this.Column1.MinimumWidth = 8;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            this.Column1.Width = 189;
             // 
             // Column2
             // 
@@ -162,6 +167,7 @@
             this.Column2.MinimumWidth = 8;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 190;
             // 
             // Column3
             // 
@@ -169,6 +175,7 @@
             this.Column3.MinimumWidth = 8;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Width = 189;
             // 
             // Column4
             // 
@@ -176,6 +183,7 @@
             this.Column4.MinimumWidth = 8;
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            this.Column4.Width = 191;
             // 
             // Column5
             // 
@@ -183,27 +191,31 @@
             this.Column5.MinimumWidth = 8;
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
+            this.Column5.Width = 182;
             // 
             // dtp_thoiGian
             // 
-            this.dtp_thoiGian.Location = new System.Drawing.Point(688, 23);
+            this.dtp_thoiGian.Location = new System.Drawing.Point(459, 15);
+            this.dtp_thoiGian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtp_thoiGian.Name = "dtp_thoiGian";
-            this.dtp_thoiGian.Size = new System.Drawing.Size(276, 26);
+            this.dtp_thoiGian.Size = new System.Drawing.Size(185, 20);
             this.dtp_thoiGian.TabIndex = 11;
             // 
             // txt_sanPham
             // 
-            this.txt_sanPham.Location = new System.Drawing.Point(266, 74);
+            this.txt_sanPham.Location = new System.Drawing.Point(177, 48);
+            this.txt_sanPham.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txt_sanPham.Name = "txt_sanPham";
-            this.txt_sanPham.Size = new System.Drawing.Size(318, 26);
+            this.txt_sanPham.Size = new System.Drawing.Size(213, 20);
             this.txt_sanPham.TabIndex = 10;
             // 
             // cmb_nhomSP
             // 
             this.cmb_nhomSP.FormattingEnabled = true;
-            this.cmb_nhomSP.Location = new System.Drawing.Point(266, 20);
+            this.cmb_nhomSP.Location = new System.Drawing.Point(177, 13);
+            this.cmb_nhomSP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmb_nhomSP.Name = "cmb_nhomSP";
-            this.cmb_nhomSP.Size = new System.Drawing.Size(318, 28);
+            this.cmb_nhomSP.Size = new System.Drawing.Size(213, 21);
             this.cmb_nhomSP.TabIndex = 9;
             // 
             // label4
@@ -211,9 +223,10 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(591, 22);
+            this.label4.Location = new System.Drawing.Point(394, 14);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 28);
+            this.label4.Size = new System.Drawing.Size(65, 19);
             this.label4.TabIndex = 4;
             this.label4.Text = "Thời gian";
             // 
@@ -222,9 +235,10 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(104, 72);
+            this.label2.Location = new System.Drawing.Point(69, 47);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 28);
+            this.label2.Size = new System.Drawing.Size(70, 19);
             this.label2.TabIndex = 6;
             this.label2.Text = "Sản phẩm";
             // 
@@ -233,20 +247,22 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(104, 22);
+            this.label1.Location = new System.Drawing.Point(69, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 28);
+            this.label1.Size = new System.Drawing.Size(111, 19);
             this.label1.TabIndex = 7;
             this.label1.Text = "Nhóm sản phẩm";
             // 
             // FormDonHang
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(26)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(1527, 783);
+            this.ClientSize = new System.Drawing.Size(1018, 509);
             this.Controls.Add(this.pnl_filter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormDonHang";
             this.Text = "TrangChu";
             this.pnl_filter.ResumeLayout(false);
